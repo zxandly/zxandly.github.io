@@ -6,15 +6,19 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
   <link rel="dns-prefetch" href="http://yoursite.com">
-  <title>ZxAndLy</title>
+  <title>Go语言安装第三方包问题 and gore 使用 | ZxAndLy</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta property="og:type" content="website">
-<meta property="og:title" content="ZxAndLy">
-<meta property="og:url" content="http://yoursite.com/index.html">
+  <meta name="description" content="Go语言安装第三方包问题 and gore 使用">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Go语言安装第三方包问题 and gore 使用">
+<meta property="og:url" content="http://yoursite.com/2018/08/22/Go语言安装第三方包问题-and-gore-使用/index.html">
 <meta property="og:site_name" content="ZxAndLy">
+<meta property="og:description" content="Go语言安装第三方包问题 and gore 使用">
 <meta property="og:locale" content="default">
+<meta property="og:updated_time" content="2018-08-22T14:35:35.084Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="ZxAndLy">
+<meta name="twitter:title" content="Go语言安装第三方包问题 and gore 使用">
+<meta name="twitter:description" content="Go语言安装第三方包问题 and gore 使用">
   
     <link rel="alternative" href="/atom.xml" title="ZxAndLy" type="application/atom+xml">
   
@@ -124,16 +128,14 @@
             <canvas data-colors="#eaeaea" data-sectionHeight="100" data-contentId="js-content" id="myCanvas1" class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
-            
-  
-    <article id="post-Go语言安装第三方包问题-and-gore-使用" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+            <article id="post-Go语言安装第三方包问题-and-gore-使用" class="article article-type-post " itemscope itemprop="blogPost">
   <div class="article-inner">
     
       <header class="article-header">
         
   
-    <h1 itemprop="name">
-      <a class="article-title" href="/2018/08/22/Go语言安装第三方包问题-and-gore-使用/">Go语言安装第三方包问题 and gore 使用</a>
+    <h1 class="article-title" itemprop="name">
+      Go语言安装第三方包问题 and gore 使用
     </h1>
   
 
@@ -146,10 +148,32 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <h2 id="Go语言安装第三方包问题-and-gore-使用"><a href="#Go语言安装第三方包问题-and-gore-使用" class="headerlink" title="Go语言安装第三方包问题 and gore 使用"></a>Go语言安装第三方包问题 and gore 使用</h2>
-        
-          <a class="article-more-a" href="/2018/08/22/Go语言安装第三方包问题-and-gore-使用/#more">阅读全文 >></a>
-        
+        <h2 id="Go语言安装第三方包问题-and-gore-使用"><a href="#Go语言安装第三方包问题-and-gore-使用" class="headerlink" title="Go语言安装第三方包问题 and gore 使用"></a>Go语言安装第三方包问题 and gore 使用</h2><a id="more"></a>
+<p>Go语言安装第三方包问题 and gore 使用</p>
+<p><code>go get</code> 感觉类似于 <code>pip</code> 可以方便的安装各种库。</p>
+<p>Go语言默认没有提供REPL环境，对初学者不是很方便。</p>
+<p>我需要安装一个 Go 的 REPL 环境 <a href="https://github.com/motemen/gore" target="_blank" rel="noopener">gore</a>, 遇到一个问题,</p>
+<p>网络问题导致的:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">Fetching https://golang.org/x/tools/go/ast/astutil?go-get=1</span><br><span class="line">https fetch failed: Get https://golang.org/x/tools/go/ast/astutil?go-get=1: dial tcp 64.233.162.84:443: i/o timeout</span><br><span class="line">package golang.org/x/tools/go/ast/astutil: unrecognized import path &quot;golang.org/x/tools/go/ast/astutil&quot; (https fetch: Get https://golang.org/x/tools/go/ast/astutil?go-get=1: dial tcp 64.233.162.84:443: i/o timeout)</span><br></pre></td></tr></table></figure>
+<p>如何解决?</p>
+<p>类似于 Python 把源码下载下来安装。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">mkdir -p $GOPATH/src/golang.org/tools/</span><br><span class="line">cd $GOPATH/src/golang.org/tools/</span><br><span class="line">git clone https://github.com/golang/tools.git tools</span><br></pre></td></tr></table></figure>
+<p>然后再使用 <code>go get</code>:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">λ go get -v github.com/motemen/gore</span><br><span class="line"></span><br><span class="line">github.com/mattn/go-runewidth</span><br><span class="line">github.com/mitchellh/go-homedir</span><br><span class="line">golang.org/x/tools/go/ast/astutil</span><br><span class="line">github.com/motemen/gore/gocode</span><br><span class="line">golang.org/x/tools/internal/fastwalk</span><br><span class="line">github.com/peterh/liner</span><br><span class="line">github.com/motemen/go-quickfix</span><br><span class="line">golang.org/x/tools/imports</span><br><span class="line">github.com/motemen/gore</span><br></pre></td></tr></table></figure>
+<p>对于 <code>gore</code> 使用, 先配置一个 <code>alias</code>:</p>
+<p><code>.zshrc</code> 加入一行:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">alias goo=&quot;/Users/leeyang/Downloads/阅读计划/MasteringGo/bin/gore&quot;</span><br></pre></td></tr></table></figure>
+<p><code>source</code> 一下:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">source .zshrc</span><br></pre></td></tr></table></figure>
+<p>使用 <code>goo</code> 进入 <code>gore</code> :</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br></pre></td><td class="code"><pre><span class="line">λ goo     </span><br><span class="line">gore version 0.3.0  :help for help</span><br><span class="line">gore&gt; :import os</span><br><span class="line">gore&gt; :doc os</span><br><span class="line">use &apos;godoc cmd/os&apos; for documentation on the os command </span><br><span class="line"></span><br><span class="line">PACKAGE DOCUMENTATION</span><br><span class="line"></span><br><span class="line">package os</span><br><span class="line">    import &quot;os&quot;</span><br><span class="line"></span><br><span class="line">    Package os provides a platform-independent interface to operating system</span><br><span class="line">    functionality. The design is Unix-like, although the error handling is</span><br><span class="line">    Go-like; failing calls return values of type error rather than error</span><br><span class="line">    numbers. Often, more information is available within the error. For</span><br><span class="line">    example, if a call that takes a file name fails, such as Open or Stat,</span><br><span class="line">    the error will include the failing file name when printed and will be of</span><br><span class="line">    type *PathError, which may be unpacked for more information.</span><br><span class="line"></span><br><span class="line">    The os interface is intended to be uniform across all operating systems.</span><br><span class="line">    Features not generally available appear in the system-specific package</span><br><span class="line">    syscall.</span><br><span class="line"></span><br><span class="line">...</span><br><span class="line"></span><br><span class="line">gore&gt; alist := os.Environ()</span><br><span class="line">[]string&#123;&quot;TERM_PROGRAM=Apple_Terminal&quot;, &quot;SHELL=/bin/zsh&quot;, &quot;TERM=xterm-256color&quot;, &quot;TMPDIR=/var/folders/mv/3zlgfn696z1348830d508x_40000gn/T/&quot;, &quot;Apple_PubSub_Socket_Render=/private/tmp/com.apple.launchd.IHsE3Wj8NL/Render&quot;, &quot;TERM_PROGRAM_VERSION=343.7&quot;, &quot;TERM_SESSION_ID=B6E4BDF5-EB0D-4135-8750-BACC53EA7516&quot;, &quot;USER=leeyang&quot;, &quot;SSH_AUTH_SOCK=/private/tmp/com.apple.launchd.pVg6UGIini/Listeners&quot;, &quot;__CF_USER_TEXT_ENCODING=0x1F5:0x19:0x34&quot;, &quot;PATH=/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:/opt/X11/bin:/usr/local/go/bin&quot;, &quot;PWD=/Users/leeyang&quot;, &quot;LANG=zh_CN.UTF-8&quot;, &quot;XPC_FLAGS=0x0&quot;, &quot;XPC_SERVICE_NAME=0&quot;, &quot;SHLVL=1&quot;, &quot;HOME=/Users/leeyang&quot;, &quot;LOGNAME=leeyang&quot;, &quot;DISPLAY=/private/tmp/com.apple.launchd.82drrxSY7W/org.macosforge.xquartz:0&quot;, &quot;OLDPWD=/Users/leeyang/Desktop&quot;, &quot;ZSH=/Users/leeyang/.oh-my-zsh&quot;, &quot;PAGER=less&quot;, &quot;LESS=-R&quot;, &quot;LC_CTYPE=zh_CN.UTF-8&quot;, &quot;LSCOLORS=Gxfxcxdxbxegedabagacad&quot;, &quot;vcs_info_msg_0_=&quot;, &quot;vcs_info_msg_1_=&quot;, &quot;_=/Users/leeyang/Downloads/阅读计划/MasteringGo/bin/gore&quot;&#125;</span><br><span class="line"></span><br><span class="line">gore&gt; for index, s := range alist &#123;</span><br><span class="line">.....     fmt.Println(index, s)</span><br><span class="line">..... &#125;</span><br><span class="line"></span><br><span class="line">0 TERM_PROGRAM=Apple_Terminal</span><br><span class="line">1 SHELL=/bin/zsh</span><br><span class="line">2 TERM=xterm-256color</span><br><span class="line">3 TMPDIR=/var/folders/mv/3zlgfn696z1348830d508x_40000gn/T/</span><br><span class="line">4 Apple_PubSub_Socket_Render=/private/tmp/com.apple.launchd.IHsE3Wj8NL/Render</span><br><span class="line">5 TERM_PROGRAM_VERSION=343.7</span><br><span class="line">6 TERM_SESSION_ID=B6E4BDF5-EB0D-4135-8750-BACC53EA7516</span><br><span class="line">7 USER=leeyang</span><br><span class="line">8 SSH_AUTH_SOCK=/private/tmp/com.apple.launchd.pVg6UGIini/Listeners</span><br><span class="line">9 __CF_USER_TEXT_ENCODING=0x1F5:0x19:0x34</span><br><span class="line">10 PATH=/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:/opt/X11/bin:/usr/local/go/bin</span><br><span class="line">11 PWD=/Users/leeyang</span><br><span class="line">12 LANG=zh_CN.UTF-8</span><br><span class="line">13 XPC_FLAGS=0x0</span><br><span class="line">14 XPC_SERVICE_NAME=0</span><br><span class="line">15 SHLVL=1</span><br><span class="line">16 HOME=/Users/leeyang</span><br><span class="line">17 LOGNAME=leeyang</span><br><span class="line">18 DISPLAY=/private/tmp/com.apple.launchd.82drrxSY7W/org.macosforge.xquartz:0</span><br><span class="line">19 OLDPWD=/Users/leeyang/Desktop</span><br><span class="line">20 ZSH=/Users/leeyang/.oh-my-zsh</span><br><span class="line">21 PAGER=less</span><br><span class="line">22 LESS=-R</span><br><span class="line">23 LC_CTYPE=zh_CN.UTF-8</span><br><span class="line">24 LSCOLORS=Gxfxcxdxbxegedabagacad</span><br><span class="line">25 vcs_info_msg_0_=</span><br><span class="line">26 vcs_info_msg_1_=</span><br><span class="line">27 _=/Users/leeyang/Downloads/阅读计划/MasteringGo/bin/gore</span><br><span class="line"></span><br><span class="line">gore&gt; :print</span><br><span class="line">package main</span><br><span class="line"></span><br><span class="line">import (</span><br><span class="line">    &quot;fmt&quot;</span><br><span class="line">    &quot;os&quot;</span><br><span class="line">)</span><br><span class="line"></span><br><span class="line">func __gore_p(xx ...interface&#123;&#125;) &#123;</span><br><span class="line">    for _, x := range xx &#123;</span><br><span class="line">        fmt.Printf(&quot;%#v\n&quot;, x)</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line">func main() &#123;</span><br><span class="line">    alist := os.Environ()</span><br><span class="line">    for index, s := range alist &#123;</span><br><span class="line">        fmt.Println(index, s)</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p><code>:doc name</code> 可以得到name包的文档<br><code>:print</code> 可以把输入的命令整理为代码<br><code>:write filename</code> 可以把输入的代码直接写入到filename文件中</p>
+<p>对于安装 <code>goquery</code> 时候也有这个问题。</p>
+<p>通过 如下方法解决:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">λ mkdir -p $GOPATH/src/golang.org/x/</span><br><span class="line">λ cd $GOPATH/src/golang.org/x/</span><br><span class="line">λ git clone https://github.com/golang/net.git net </span><br><span class="line">λ go install net</span><br></pre></td></tr></table></figure>
+<p>需要多一步 <code>go install net</code>。</p>
+<p>参考:<br><a href="https://blog.csdn.net/CSXIAOYAOJIANXIAN/article/details/71700736" target="_blank" rel="noopener">https://blog.csdn.net/CSXIAOYAOJIANXIAN/article/details/71700736</a><br><a href="https://github.com/motemen/gore" target="_blank" rel="noopener">https://github.com/motemen/gore</a></p>
+
       
 
       
@@ -160,16 +184,75 @@
       
 
       
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2018/08/22/Go语言安装第三方包问题-and-gore-使用/">展开全文 >></a>
-        </p>
-      
 
+      
+        
+<div class="share-btn share-icons tooltip-left">
+  <div class="tooltip tooltip-east">
+    <span class="tooltip-item">
+      <a href="javascript:;" class="share-sns share-outer">
+        <i class="icon icon-share"></i>
+      </a>
+    </span>
+    <span class="tooltip-content">
+      <div class="share-wrap">
+        <div class="share-icons">
+          <a class="weibo share-sns" href="javascript:;" data-type="weibo">
+            <i class="icon icon-weibo"></i>
+          </a>
+          <a class="weixin share-sns wxFab" href="javascript:;" data-type="weixin">
+            <i class="icon icon-weixin"></i>
+          </a>
+          <a class="qq share-sns" href="javascript:;" data-type="qq">
+            <i class="icon icon-qq"></i>
+          </a>
+          <a class="douban share-sns" href="javascript:;" data-type="douban">
+            <i class="icon icon-douban"></i>
+          </a>
+          <a class="qzone share-sns" href="javascript:;" data-type="qzone">
+            <i class="icon icon-qzone"></i>
+          </a>
+          <a class="facebook share-sns" href="javascript:;" data-type="facebook">
+            <i class="icon icon-facebook"></i>
+          </a>
+          <a class="twitter share-sns" href="javascript:;" data-type="twitter">
+            <i class="icon icon-twitter"></i>
+          </a>
+          <a class="google share-sns" href="javascript:;" data-type="google">
+            <i class="icon icon-google"></i>
+          </a>
+        </div>
+      </div>
+    </span>
+  </div>
+</div>
+
+<div class="page-modal wx-share js-wx-box">
+    <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <div class="wx-qrcode">
+      <img src="//pan.baidu.com/share/qrcode?url=http://yoursite.com/2018/08/22/Go语言安装第三方包问题-and-gore-使用/" alt="微信分享二维码">
+    </div>
+</div>
+
+<div class="mask js-mask"></div>
       
       <div class="clearfix"></div>
     </div>
   </div>
 </article>
+
+  
+<nav id="article-nav">
+  
+  
+    <a href="/2018/08/22/Mastering-Go笔记一/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">Mastering_Go笔记一</div>
+      <i class="icon-circle-right"></i>
+    </a>
+  
+</nav>
+
 
 <aside class="wrap-side-operation">
     <div class="mod-side-operation">
@@ -189,277 +272,14 @@
 
 
 
-
   
-    <article id="post-Mastering-Go笔记一" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
   
-    <h1 itemprop="name">
-      <a class="article-title" href="/2018/08/22/Mastering-Go笔记一/">Mastering_Go笔记一</a>
-    </h1>
   
 
-        
-        <a href="/2018/08/22/Mastering-Go笔记一/" class="archive-article-date">
-  	<time datetime="2018-08-22T14:21:01.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-08-22</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h2 id="Mastering-Go笔记一"><a href="#Mastering-Go笔记一" class="headerlink" title="Mastering_Go笔记一"></a>Mastering_Go笔记一</h2>
-        
-          <a class="article-more-a" href="/2018/08/22/Mastering-Go笔记一/#more">阅读全文 >></a>
-        
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2018/08/22/Mastering-Go笔记一/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-GoldbachConjecture" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2018/08/15/GoldbachConjecture/">GoldbachConjecture 哥德巴赫猜想</a>
-    </h1>
   
 
-        
-        <a href="/2018/08/15/GoldbachConjecture/" class="archive-article-date">
-  	<time datetime="2018-08-15T03:33:39.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-08-15</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p><a href="https://zh.wikipedia.org/wiki/%E5%93%A5%E5%BE%B7%E5%B7%B4%E8%B5%AB%E7%8C%9C%E6%83%B3" target="_blank" rel="noopener">哥德巴赫猜想</a>#<em>任一大于2的偶数，都可表示成两个素数之和</em>#</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * 输入一个偶数，输出这个偶数为两个素数之和的表现形式</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">GoldbachConjecture</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">goldbachConjecture</span><span class="params">(<span class="keyword">int</span> even)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">if</span> (even &lt; <span class="number">2</span> || even % <span class="number">2</span> != <span class="number">0</span>) &#123;</span><br><span class="line">            <span class="keyword">return</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="comment">//只用循环到even的一半，不然会重复输出</span></span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">2</span>; i &lt;= even / <span class="number">2</span>; i++) &#123;</span><br><span class="line">            <span class="keyword">int</span> j = even - i;</span><br><span class="line">            <span class="keyword">if</span> (isPrime(i) &amp;&amp; isPrime(j)) &#123;</span><br><span class="line">                System.out.println(even + <span class="string">" = "</span> + i + <span class="string">"+"</span> +j);</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">static</span> <span class="keyword">boolean</span> <span class="title">isPrime</span><span class="params">(<span class="keyword">int</span> number)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">if</span> (n &lt; <span class="number">2</span>) &#123;</span><br><span class="line">            <span class="keyword">return</span> <span class="keyword">false</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> j = <span class="number">2</span>; j &lt;= Math.sqrt(number); j++) &#123;</span><br><span class="line">            <span class="keyword">if</span> (number % j == <span class="number">0</span>) &#123;</span><br><span class="line">                <span class="keyword">return</span> <span class="keyword">false</span>;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">true</span>;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2018/08/15/GoldbachConjecture/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-LeetCode-Count-and-say" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2018/08/13/LeetCode-Count-and-say/">LeetCode_Count_and_say</a>
-    </h1>
   
 
-        
-        <a href="/2018/08/13/LeetCode-Count-and-say/" class="archive-article-date">
-  	<time datetime="2018-08-13T15:39:40.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-08-13</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h2 id="LeetCode-count-and-say问题"><a href="#LeetCode-count-and-say问题" class="headerlink" title="LeetCode count and say问题"></a>LeetCode count and say问题</h2>
-        
-          <a class="article-more-a" href="/2018/08/13/LeetCode-Count-and-say/#more">阅读全文 >></a>
-        
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">LeetCode</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2018/08/13/LeetCode-Count-and-say/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-hello-world" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2018/08/13/hello-world/">Hello World</a>
-    </h1>
-  
-
-        
-        <a href="/2018/08/13/hello-world/" class="archive-article-date">
-  	<time datetime="2018-08-13T14:51:25.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-08-13</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h2 id="Take-a-desk-start-a-family-For-each-other"><a href="#Take-a-desk-start-a-family-For-each-other" class="headerlink" title="Take a desk, start a family. For each other."></a>Take a desk, start a family. For each other.</h2><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">print(<span class="string">"Hello world!"</span>)</span><br></pre></td></tr></table></figure>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">HelloWorld</span></span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span></span>&#123;</span><br><span class="line">        System.out.println(<span class="string">"Hello world!"</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> main</span><br><span class="line"><span class="keyword">import</span> <span class="string">"fmt"</span></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">main</span><span class="params">()</span></span>&#123;</span><br><span class="line">    fmt.Println(<span class="string">"Hello world! 你好 世界！"</span>)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2018/08/13/hello-world/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
   
 
 
@@ -482,8 +302,8 @@
     <script>
 	var yiliaConfig = {
 		mathjax: true,
-		isHome: true,
-		isPost: false,
+		isHome: false,
+		isPost: true,
 		isArchive: false,
 		isTag: false,
 		isCategory: false,
