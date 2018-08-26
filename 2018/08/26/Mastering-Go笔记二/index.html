@@ -6,15 +6,19 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
   <link rel="dns-prefetch" href="http://yoursite.com">
-  <title>Archives: 2018/8 | ZxAndLy</title>
+  <title>Mastering_Go笔记二 | ZxAndLy</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta property="og:type" content="website">
-<meta property="og:title" content="ZxAndLy">
-<meta property="og:url" content="http://yoursite.com/archives/2018/08/index.html">
+  <meta name="description" content="Mastering_Go笔记二">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Mastering_Go笔记二">
+<meta property="og:url" content="http://yoursite.com/2018/08/26/Mastering-Go笔记二/index.html">
 <meta property="og:site_name" content="ZxAndLy">
+<meta property="og:description" content="Mastering_Go笔记二">
 <meta property="og:locale" content="default">
+<meta property="og:updated_time" content="2018-08-26T13:16:10.373Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="ZxAndLy">
+<meta name="twitter:title" content="Mastering_Go笔记二">
+<meta name="twitter:description" content="Mastering_Go笔记二">
   
     <link rel="alternative" href="/atom.xml" title="ZxAndLy" type="application/atom+xml">
   
@@ -124,195 +128,245 @@
             <canvas data-colors="#eaeaea" data-sectionHeight="100" data-contentId="js-content" id="myCanvas1" class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
-            
+            <article id="post-Mastering-Go笔记二" class="article article-type-post " itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
   
+    <h1 class="article-title" itemprop="name">
+      Mastering_Go笔记二
+    </h1>
   
-    
-    
-      
-      
-      <section class="archives-wrap">
-        <div class="archive-year-wrap">
-          <a href="/archives/2018" class="archive-year">2018</a>
-        </div>
-        <div class="archives">
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2018/08/26/Mastering-Go笔记二/" class="archive-article-date">
+
+        
+        <a href="/2018/08/26/Mastering-Go笔记二/" class="archive-article-date">
   	<time datetime="2018-08-26T13:14:22.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-08-26</time>
 </a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2018/08/26/Mastering-Go笔记二/">Mastering_Go笔记二</a>
-    </h1>
-  
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="Mastering-Go笔记二"><a href="#Mastering-Go笔记二" class="headerlink" title="Mastering_Go笔记二"></a>Mastering_Go笔记二</h2><a id="more"></a>
+<p>本文主要通过 <code>Masting Go</code> 一书第二章学习Go语言底层知识和一些黑魔法。</p>
+<p>Go语言指针，不能随意转换类型:</p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> main  <span class="comment">//表明源文件属于main包</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// 引入包</span></span><br><span class="line"><span class="keyword">import</span> (</span><br><span class="line">    <span class="string">"fmt"</span></span><br><span class="line">    <span class="string">"unsafe"</span></span><br><span class="line">)</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">main</span><span class="params">()</span></span> &#123;</span><br><span class="line">    <span class="keyword">var</span> value <span class="keyword">int64</span> = <span class="number">5</span></span><br><span class="line">    <span class="keyword">var</span> p1 = &amp;value</span><br><span class="line">    <span class="keyword">var</span> p2 = (*<span class="keyword">int32</span>)(unsafe.Pointer(p1))  <span class="comment">// a 32-bit pointer cannot store a 64-bit integer</span></span><br><span class="line"></span><br><span class="line">    fmt.Println(<span class="string">"*p1: "</span>, *p1)</span><br><span class="line">    fmt.Println(<span class="string">"*p2: "</span>, *p2)</span><br><span class="line"></span><br><span class="line">    *p1 = <span class="number">5434123412312431212</span></span><br><span class="line">    fmt.Println(value)</span><br><span class="line">    fmt.Println(<span class="string">"*p2: "</span>, *p2)</span><br><span class="line">    *p1 = <span class="number">54341234</span></span><br><span class="line">    fmt.Println(value)</span><br><span class="line">    fmt.Println(<span class="string">"*p2: "</span>, *p2)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>使用 <code>go tool compile</code> 可以把源码编译为目标代码 使用 <code>-pack</code> 归档, <code>-race</code> 检测是否有竞态条件:</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">λ go tool compile -race -pack unsafe.go &amp;&amp; file ./unsafe.a</span><br><span class="line">./unsafe.a: current ar archive</span><br><span class="line"></span><br><span class="line">λ ar -t unsafe.a</span><br><span class="line">__.PKGDEF</span><br><span class="line">_go_.o</span><br></pre></td></tr></table></figure>
+<p>使用 <code>go tool compile -S temp.go</code> 可以得到很多的类似汇编语言的代码:</p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">λ <span class="keyword">go</span> tool compile -S temp.<span class="keyword">go</span> </span><br><span class="line"><span class="string">""</span>.main STEXT size=<span class="number">110</span> args=<span class="number">0x0</span> locals=<span class="number">0x48</span></span><br><span class="line">    <span class="number">0x0000</span> <span class="number">00000</span> (temp.<span class="keyword">go</span>:<span class="number">9</span>)    TEXT    <span class="string">""</span>.main(SB), $<span class="number">72</span><span class="number">-0</span></span><br><span class="line">    <span class="number">0x0000</span> <span class="number">00000</span> (temp.<span class="keyword">go</span>:<span class="number">9</span>)    MOVQ    (TLS), CX</span><br><span class="line">    <span class="number">0x0009</span> <span class="number">00009</span> (temp.<span class="keyword">go</span>:<span class="number">9</span>)    CMPQ    SP, <span class="number">16</span>(CX)</span><br><span class="line">    <span class="number">0x000d</span> <span class="number">00013</span> (temp.<span class="keyword">go</span>:<span class="number">9</span>)    JLS <span class="number">103</span></span><br><span class="line">    <span class="number">0x000f</span> <span class="number">00015</span> (temp.<span class="keyword">go</span>:<span class="number">9</span>)    SUBQ    $<span class="number">72</span>, SP</span><br><span class="line">    <span class="number">0x0013</span> <span class="number">00019</span> (temp.<span class="keyword">go</span>:<span class="number">9</span>)    MOVQ    BP, <span class="number">64</span>(SP)</span><br><span class="line">    <span class="number">0x0018</span> <span class="number">00024</span> (temp.<span class="keyword">go</span>:<span class="number">9</span>)    LEAQ    <span class="number">64</span>(SP), BP</span><br><span class="line">    <span class="number">0x001d</span> <span class="number">00029</span> (temp.<span class="keyword">go</span>:<span class="number">9</span>)    FUNCDATA    $<span class="number">0</span>, gclocals·<span class="number">69</span>c1753bd5f81501d95132d08af04464(SB)</span><br><span class="line">    <span class="number">0x001d</span> <span class="number">00029</span> (temp.<span class="keyword">go</span>:<span class="number">9</span>)    FUNCDATA    $<span class="number">1</span>, gclocals·e226d4ae4a7cad8835311c6a4683c14f(SB)</span><br><span class="line">    <span class="number">0x001d</span> <span class="number">00029</span> (temp.<span class="keyword">go</span>:<span class="number">10</span>)   XORPS   X0, X0</span><br><span class="line">    <span class="number">0x0020</span> <span class="number">00032</span> (temp.<span class="keyword">go</span>:<span class="number">10</span>)   MOVUPS  X0, <span class="string">""</span>..autotmp_0+<span class="number">48</span>(SP)</span><br><span class="line">    <span class="number">0x0025</span> <span class="number">00037</span> (temp.<span class="keyword">go</span>:<span class="number">10</span>)   LEAQ    <span class="keyword">type</span>.<span class="keyword">string</span>(SB), AX</span><br><span class="line">    <span class="number">0x002c</span> <span class="number">00044</span> (temp.<span class="keyword">go</span>:<span class="number">10</span>)   MOVQ    AX, <span class="string">""</span>..autotmp_0+<span class="number">48</span>(SP)</span><br></pre></td></tr></table></figure>
+<p>Go语言GC是和进程一起运行的，用来释放不再需要的内存资源，使用以下代码查看内存使用和GC次数:</p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> main  <span class="comment">//表明源文件属于main包</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// 引入包</span></span><br><span class="line"><span class="keyword">import</span> (</span><br><span class="line">    <span class="string">"fmt"</span></span><br><span class="line">    <span class="string">"runtime"</span></span><br><span class="line">    <span class="string">"time"</span></span><br><span class="line">)</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">printMemStats</span><span class="params">(mem runtime.MemStats)</span></span> &#123;</span><br><span class="line">    runtime.ReadMemStats(&amp;mem)</span><br><span class="line"></span><br><span class="line">    fmt.Println(<span class="string">"mem.Alloc:"</span>, mem.Alloc)</span><br><span class="line">    fmt.Println(<span class="string">"mem.TotalAlloc:"</span>, mem.TotalAlloc)</span><br><span class="line">    fmt.Println(<span class="string">"mem.HeapAlloc:"</span>, mem.HeapAlloc)</span><br><span class="line">    fmt.Println(<span class="string">"mem.NumGC:"</span>, mem.NumGC)</span><br><span class="line">    fmt.Println(<span class="string">"-----"</span>)</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">main</span><span class="params">()</span></span> &#123;</span><br><span class="line">    <span class="keyword">var</span> mem runtime.MemStats</span><br><span class="line">    printMemStats(mem)</span><br><span class="line"></span><br><span class="line">    <span class="keyword">for</span> i := <span class="number">0</span>; i &lt; <span class="number">10</span>; i++ &#123;</span><br><span class="line">        s := <span class="built_in">make</span>([]<span class="keyword">byte</span>, <span class="number">50000000</span>)</span><br><span class="line">        <span class="keyword">if</span> s == <span class="literal">nil</span> &#123;</span><br><span class="line">            fmt.Println(<span class="string">"Operation failed!"</span>)</span><br><span class="line">        &#125;</span><br><span class="line">        time.Sleep(<span class="number">5</span> * time.Second)</span><br><span class="line">        printMemStats(mem)</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    printMemStats(mem)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>运行结果:</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line">mem.Alloc: 67336</span><br><span class="line">mem.TotalAlloc: 67336</span><br><span class="line">mem.HeapAlloc: 67336</span><br><span class="line">mem.NumGC: 0</span><br><span class="line">-----</span><br><span class="line">mem.Alloc: 70792</span><br><span class="line">mem.TotalAlloc: 50077928</span><br><span class="line">mem.HeapAlloc: 70792</span><br><span class="line">mem.NumGC: 1</span><br><span class="line">-----</span><br><span class="line">mem.Alloc: 71120</span><br><span class="line">mem.TotalAlloc: 100083080</span><br><span class="line">mem.HeapAlloc: 71120</span><br><span class="line">mem.NumGC: 2</span><br><span class="line">-----</span><br><span class="line">mem.Alloc: 71576</span><br><span class="line">mem.TotalAlloc: 150088296</span><br><span class="line">mem.HeapAlloc: 71576</span><br><span class="line">mem.NumGC: 3</span><br><span class="line">-----</span><br><span class="line">mem.Alloc: 71576</span><br><span class="line">mem.TotalAlloc: 200093056</span><br><span class="line">mem.HeapAlloc: 71576</span><br><span class="line">mem.NumGC: 4</span><br><span class="line">-----</span><br><span class="line"></span><br><span class="line">...</span><br></pre></td></tr></table></figure>
+<p>使用 <code>GODEBUG=gctrace=1 go run temp.go</code> 可以看到GC过程:</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line">λ GODEBUG=gctrace=1 go run temp.go</span><br><span class="line">gc 1 @0.141s 0%: 0.017+0.67+0.066 ms clock, 0.068+0.23/0.51/0.91+0.26 ms cpu, 4-&gt;4-&gt;0 MB, 5 MB goal, 4 P</span><br><span class="line">gc 2 @0.279s 0%: 0.008+0.50+0.032 ms clock, 0.033+0.40/0.36/0.93+0.12 ms cpu, 4-&gt;4-&gt;0 MB, 5 MB goal, 4 P</span><br><span class="line">gc 3 @0.449s 0%: 0.077+1.6+0.15 ms clock, 0.30+0.40/1.5/0.36+0.60 ms cpu, 4-&gt;4-&gt;1 MB, 5 MB goal, 4 P</span><br><span class="line">gc 4 @0.457s 0%: 0.005+1.1+0.055 ms clock, 0.022+0.30/0.87/0.72+0.22 ms cpu, 4-&gt;4-&gt;1 MB, 5 MB goal, 4 P</span><br><span class="line">gc 5 @0.488s 0%: 0.008+1.9+0.10 ms clock, 0.034+0.16/1.7/0.62+0.42 ms cpu, 4-&gt;4-&gt;1 MB, 5 MB goal, 4 P</span><br><span class="line">gc 6 @0.511s 0%: 0.006+0.71+0.033 ms clock, 0.026+0.30/0.56/1.3+0.13 ms cpu, 4-&gt;4-&gt;1 MB, 5 MB goal, 4 P</span><br><span class="line"><span class="comment"># command-line-arguments</span></span><br><span class="line">gc 1 @0.026s 0%: 0.020+4.2+0.11 ms clock, 0.080+1.1/3.6/4.7+0.47 ms cpu, 4-&gt;4-&gt;3 MB, 5 MB goal, 4 P</span><br><span class="line"><span class="comment"># command-line-arguments</span></span><br><span class="line">gc 1 @0.003s 0%: 0.025+20+0.24 ms clock, 0.10+2.3/1.8/0.31+0.98 ms cpu, 4-&gt;5-&gt;5 MB, 5 MB goal, 4 P</span><br><span class="line">gc 2 @0.036s 0%: 0.007+6.6+0.065 ms clock, 0.031+0.12/6.4/0.60+0.26 ms cpu, 7-&gt;8-&gt;8 MB, 10 MB goal, 4 P</span><br><span class="line">gc 3 @0.073s 0%: 0.014+7.7+0.047 ms clock, 0.059+0.15/7.2/11+0.18 ms cpu, 13-&gt;14-&gt;13 MB, 16 MB goal, 4 P</span><br><span class="line">gc 4 @0.159s 0%: 0.010+31+0.10 ms clock, 0.041+1.0/28/0.81+0.42 ms cpu, 24-&gt;26-&gt;24 MB, 26 MB goal, 4 P</span><br><span class="line">mem.Alloc: 67496</span><br><span class="line">mem.TotalAlloc: 67496</span><br><span class="line">mem.HeapAlloc: 67496</span><br><span class="line">mem.NumGC: 0</span><br><span class="line">-----</span><br><span class="line">gc 1 @0.003s 0%: 0.008+0.13+0.15 ms clock, 0.032+0.081/0/0.19+0.63 ms cpu, 47-&gt;47-&gt;0 MB, 48 MB goal, 4 P</span><br><span class="line">mem.Alloc: 68968</span><br><span class="line">mem.TotalAlloc: 50076296</span><br><span class="line">mem.HeapAlloc: 68968</span><br><span class="line">mem.NumGC: 1</span><br><span class="line">-----</span><br><span class="line"></span><br><span class="line">...</span><br></pre></td></tr></table></figure>
+<p>三色算法简介:</p>
+<p>三色算法原理是把对象分为三个集合，黑白灰三个颜色，每个对象只能属于一个集合。</p>
+<blockquote>
+<p>The objects of the black set are<br>guaranteed to have no pointers to any object of the white set. However, an object in the<br>white set can have a pointer to an object of the black set, because this has no effect on the<br>operation of the garbage collector! The objects of the grey set might have pointers to some<br>objects of the white set. Also, the objects of the white set are candidates for garbage<br>collection.</p>
+</blockquote>
+<p>黑色集合的对象保证不会指向白色集合对象。白色集合的对象可以指向黑色集合（从黑色集合引用的），因为对GC没有影响。<br>灰色集合的对象可以被白色集合里对象引用。白色集合里的对象就是GC的候选对象。也就是说，白色集合里的都是引用别人的，<br>黑色集合里的不会引用白色集合的，灰色集合里的可以被白色集合里的引用。</p>
+<blockquote>
+<p>Note that no object can go directly from the black set to the white set, which allows the<br>algorithm to operate and be able to clear the objects in the white set. Additionally, no object<br>of the black set can directly point to an object of the white set.</p>
+</blockquote>
+<blockquote>
+<p>When the garbage collection begins, all objects are white and the garbage collector visits all<br>of the root objects and colors them grey. The roots are the objects that can be directly<br>accessed by the application, which includes global variables and other things on the stack.<br>After this, the garbage<br>collector picks a grey object, makes it black, and starts searching to determine if that object<br>has pointers to other objects of the white set. This means that when a grey object is being<br>scanned for pointers to other objects, it is colored black. If that scan discovers that this<br>particular object has one or more pointers to a white object, it puts that white object in the<br>grey set. This process keeps going for as long as objects exist in the grey set. After that, the<br>objects in the white set are unreachable and their memory space can be reused. Therefore, at<br>this point, the elements of the white set are said to be garbage collected.</p>
+</blockquote>
+<p>GC开始时，所有对象都放白色集合里，然后垃圾回收器会遍历所有根对象并把他们标记灰色。跟节点对象是可以直接被应用访问的，<br>包括全局变量和栈上的对象。</p>
+<p>Go的GC也能用在 <code>channel</code> 上:</p>
+<blockquote>
+<p>The Go garbage collection can also be applied to variables such as channels! When the<br>garbage collector finds out that a channel is unreachable and that the channel variable can<br>no longer be accessed, it will free its resources even if the channel has not been closed!</p>
+</blockquote>
+<p>Go语言允许手动GC, 但是 <code>runtime.GC()</code> 的调用是同步的，会阻塞整个进程:</p>
+<blockquote>
+<p>Go allows you to initiate a garbage collection manually by putting a runtime.GC()<br>statement in your Go code. However, keep in mind that runtime.GC() will block the<br>caller, and it might block the entire program, especially if you are running a very busy Go<br>program with many objects. </p>
+</blockquote>
+<p>另一个使用 <code>unsafe</code> 的例子:</p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> main  <span class="comment">//表明源文件属于main包</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// 引入包</span></span><br><span class="line"><span class="keyword">import</span> (</span><br><span class="line">    <span class="string">"fmt"</span></span><br><span class="line">    <span class="string">"unsafe"</span></span><br><span class="line">)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">main</span><span class="params">()</span></span> &#123;</span><br><span class="line">    array := [...]<span class="keyword">int</span>&#123;<span class="number">0</span>, <span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="number">4</span>&#125;</span><br><span class="line">    pointer := &amp;array[<span class="number">0</span>]</span><br><span class="line">    fmt.Print(*pointer, <span class="string">"\n"</span>)</span><br><span class="line"></span><br><span class="line">    memaddr := <span class="keyword">uintptr</span>(unsafe.Pointer(pointer)) + unsafe.Sizeof(array[<span class="number">0</span>])</span><br><span class="line">    <span class="comment">// 也可以越界访问</span></span><br><span class="line">    <span class="keyword">for</span> i:= <span class="number">0</span>; i &lt; <span class="built_in">len</span>(array); i++ &#123;</span><br><span class="line">        pointer = (*<span class="keyword">int</span>)(unsafe.Pointer(memaddr))</span><br><span class="line">        fmt.Print(*pointer, <span class="string">"\n"</span>)</span><br><span class="line">        memaddr = <span class="keyword">uintptr</span>(unsafe.Pointer(pointer)) + unsafe.Sizeof(array[<span class="number">0</span>])</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>Go语言内联C语言实例:</p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="keyword">package</span> main  <span class="comment">//必须不留空行</span></span><br><span class="line"><span class="comment">// #include &lt;stdio.h&gt;</span></span><br><span class="line"><span class="comment">// #include &lt;stdlib.h&gt;</span></span><br><span class="line"><span class="comment">// void callC() &#123;</span></span><br><span class="line"><span class="comment">//   int i;</span></span><br><span class="line"><span class="comment">//   for (i = 0; i &lt; 10; i++) &#123;</span></span><br><span class="line"><span class="comment">//     printf("Calling C code!\n");</span></span><br><span class="line"><span class="comment">//   &#125;</span></span><br><span class="line"><span class="comment">//   exit(0); // 如果C代码退出的话，Go进程也会退出</span></span><br><span class="line"><span class="comment">// &#125;</span></span><br><span class="line"><span class="keyword">import</span> <span class="string">"C"</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> <span class="string">"fmt"</span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">main</span><span class="params">()</span></span> &#123;</span><br><span class="line">    fmt.Println(<span class="string">"A Go statement!"</span>)</span><br><span class="line">    C.callC()</span><br><span class="line">    fmt.Println(<span class="string">"Nerver execute statement!"</span>)  <span class="comment">//这句不会执行了 </span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>从Go语言调用C语言，多个文件实例:</p>
+<p>hello/hello.h:</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">ifndef</span> HELLO_H</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> HELLO_H</span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">cHello</span><span class="params">()</span></span>;</span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">printMessage</span><span class="params">(<span class="keyword">char</span>* message)</span></span>;</span><br><span class="line"></span><br><span class="line"><span class="meta">#<span class="meta-keyword">endif</span></span></span><br></pre></td></tr></table></figure>
+<p>hello/hello.c:</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;stdio.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">"hello.h"</span></span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">cHello</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">"Hello from C!\n"</span>);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">printMessage</span><span class="params">(<span class="keyword">char</span>* message)</span> </span>&#123;</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">"Go send me %s\n"</span>, message);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>hello1.go 和 hello 文件夹在一个目录下:</p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> main</span><br><span class="line"><span class="comment">// #cgo CFLAGS: -I$&#123;SRCDIR&#125;/hellolib</span></span><br><span class="line"><span class="comment">// #cgo LDFLAGS: $&#123;SRCDIR&#125;/hello.a</span></span><br><span class="line"><span class="comment">// #include &lt;stdlib.h&gt;</span></span><br><span class="line"><span class="comment">// #include "hello.h" // hello.h 文件需要和 hello1.go放在一个文件夹下面，需要把hello.h复制出来</span></span><br><span class="line"><span class="keyword">import</span> <span class="string">"C"</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> (</span><br><span class="line">    <span class="string">"fmt"</span></span><br><span class="line">    <span class="string">"unsafe"</span></span><br><span class="line">)</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">main</span><span class="params">()</span></span> &#123;</span><br><span class="line">    fmt.Println(<span class="string">"Going to call a C function!"</span>)</span><br><span class="line">    C.cHello()</span><br><span class="line"></span><br><span class="line">    fmt.Println(<span class="string">"Going to call another C function!"</span>)</span><br><span class="line">    <span class="comment">// CString 是给C的参数必备的</span></span><br><span class="line">    myMessage := C.CString(<span class="string">"This is Mihalis!"</span>)</span><br><span class="line">    <span class="keyword">defer</span> C.free(unsafe.Pointer(myMessage))</span><br><span class="line">    C.printMessage(myMessage)</span><br><span class="line"></span><br><span class="line">    fmt.Println(<span class="string">"All perfectly done!"</span>)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>编译并打包 hello 的静态库:</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">leeyang <span class="keyword">in</span> ~/Downloads/阅读计划/MasteringGo λ gcc -c hello/*.c</span><br><span class="line">leeyang <span class="keyword">in</span> ~/Downloads/阅读计划/MasteringGo λ ar rs hello.a hello.o</span><br><span class="line">ar: creating archive helloC.a</span><br><span class="line">leeyang <span class="keyword">in</span> ~/Downloads/阅读计划/MasteringGo λ file hello.a</span><br><span class="line">helloC.a: current ar archive random library</span><br></pre></td></tr></table></figure>
+<p>构建 <code>hello1.go</code> 并运行 hello1:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">leeyang in ~/Downloads/阅读计划/MasteringGo λ go build hello1.go</span><br><span class="line">leeyang in ~/Downloads/阅读计划/MasteringGo λ ./hello1 </span><br><span class="line">Going to call a C function!</span><br><span class="line">Hello from C!</span><br><span class="line">Going to call another C function!</span><br><span class="line">Go send me This is Mihalis!</span><br><span class="line">All perfectly done!</span><br></pre></td></tr></table></figure>
+<p>从C语言调用Go的函数:</p>
+<blockquote>
+<p>The Go package<br>will be converted into a C shared library that will be used in the C program.</p>
+</blockquote>
+<p>把Go语言的包转为C语言的共享库，然后被C语言调用。</p>
+<p>usedByC.go:</p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="keyword">package</span> main</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> <span class="string">"C"</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> (</span><br><span class="line">    <span class="string">"fmt"</span></span><br><span class="line">)</span><br><span class="line"></span><br><span class="line"><span class="comment">//export PrintMessage</span></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">PrintMessage</span><span class="params">()</span></span> &#123;</span><br><span class="line">    fmt.Println(<span class="string">"A Go function!"</span>)</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">//export Multiply</span></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">Multiply</span><span class="params">(a, b <span class="keyword">int</span>)</span> <span class="title">int</span></span> &#123;</span><br><span class="line">    <span class="keyword">return</span> a * b</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">main</span><span class="params">()</span></span> &#123;</span><br><span class="line"></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">$ <span class="keyword">go</span> build -o usedByC.o -buildmode=c-shared usedByC.<span class="keyword">go</span></span><br><span class="line"></span><br><span class="line">$ ll</span><br><span class="line">总用量 <span class="number">2.3</span>M</span><br><span class="line">-rw-rw-r-- <span class="number">1</span> vagrant vagrant  <span class="number">214</span> <span class="number">8</span>月  <span class="number">24</span> <span class="number">13</span>:<span class="number">12</span> usedByC.<span class="keyword">go</span></span><br><span class="line">-rw-rw-r-- <span class="number">1</span> vagrant vagrant <span class="number">1.4</span>K <span class="number">8</span>月  <span class="number">24</span> <span class="number">13</span>:<span class="number">12</span> usedByC.h</span><br><span class="line">-rw-rw-r-- <span class="number">1</span> vagrant vagrant <span class="number">2.3</span>M <span class="number">8</span>月  <span class="number">24</span> <span class="number">13</span>:<span class="number">12</span> usedByC.o</span><br><span class="line">-rwxrwxr-x <span class="number">1</span> vagrant vagrant <span class="number">7.2</span>K <span class="number">8</span>月  <span class="number">24</span> <span class="number">13</span>:<span class="number">13</span> willusego</span><br><span class="line">-rw-rw-r-- <span class="number">1</span> vagrant vagrant  <span class="number">332</span> <span class="number">8</span>月  <span class="number">24</span> <span class="number">13</span>:<span class="number">13</span> willusego.c</span><br></pre></td></tr></table></figure>
+<p>C语言调用文件:</p>
+<p>willusego.c:</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;stdio.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;stdlib.h&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">"usedByC.h"</span></span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">(<span class="keyword">int</span> argc, <span class="keyword">char</span> <span class="keyword">const</span> *argv[])</span></span>&#123;</span><br><span class="line">    GoInt x = <span class="number">12</span>;</span><br><span class="line">    GoInt y = <span class="number">22</span>;</span><br><span class="line"></span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">"About to call a Go function!\n"</span>);</span><br><span class="line">    PrintMessage();</span><br><span class="line"></span><br><span class="line">    GoInt sum = Multiply(x, y);</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">"Multiply of %d %d is %d \n"</span>, (<span class="keyword">int</span>)x, (<span class="keyword">int</span>)y, (<span class="keyword">int</span>)sum);</span><br><span class="line"></span><br><span class="line">    <span class="built_in">exit</span>(<span class="number">0</span>);</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>编译C语言代码:</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">$ gcc -o willusego willusego.c ./usedByC.o</span><br><span class="line"></span><br><span class="line"><span class="comment"># vagrant @ chenwen in ~/temp [13:16:12] </span></span><br><span class="line">$ ./willusego </span><br><span class="line">About to call a Go <span class="keyword">function</span>!</span><br><span class="line">A Go <span class="keyword">function</span>!</span><br><span class="line">Multiply of 12 22 is 264</span><br></pre></td></tr></table></figure>
+<p>练习1:</p>
+<blockquote>
+<p>Write a Go function, and use it in a C program.</p>
+</blockquote>
+<p>以这个问题为例: <a href="https://leetcode.com/problems/length-of-last-word/description/" target="_blank" rel="noopener">https://leetcode.com/problems/length-of-last-word/description/</a></p>
+<p>用C语言写可能比较麻烦，那么用Go写完，让C语言调用它:</p>
+<p>usedByC.go:</p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> main</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> <span class="string">"C"</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> (</span><br><span class="line">    _ <span class="string">"fmt"</span></span><br><span class="line">    <span class="string">"strings"</span></span><br><span class="line">)</span><br><span class="line"></span><br><span class="line"><span class="comment">//export LengthOfLastWord</span></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">LengthOfLastWord</span><span class="params">(s <span class="keyword">string</span>)</span> <span class="title">int</span></span> &#123;</span><br><span class="line">    words := strings.Split(strings.TrimSpace(s), <span class="string">" "</span>)</span><br><span class="line">    length := <span class="built_in">len</span>(words)</span><br><span class="line">    <span class="keyword">return</span> <span class="built_in">len</span>(words[length - <span class="number">1</span>])</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">main</span><span class="params">()</span></span> &#123;</span><br><span class="line"></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">leeyang in ~/Downloads/阅读计划/MasteringGo/temp λ <span class="keyword">go</span> build -o usedByC.o -buildmode=c-shared usedByC.<span class="keyword">go</span></span><br></pre></td></tr></table></figure>
+<p>willusego.c:</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;stdio.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;stdlib.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;string.h&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">"usedByC.h"</span></span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">(<span class="keyword">int</span> argc, <span class="keyword">char</span> <span class="keyword">const</span> *argv[])</span></span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">char</span> cvalue[] = <span class="string">"Hello This is a C Application"</span>;</span><br><span class="line">    <span class="keyword">int</span> length = <span class="built_in">strlen</span>(cvalue);</span><br><span class="line"></span><br><span class="line">    GoString value = &#123;cvalue, length&#125;;  <span class="comment">//go中的字符串类型在c中为GoString</span></span><br><span class="line"></span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">"max length word length is %d\n"</span>, (<span class="keyword">int</span>)LengthOfLastWord(value));</span><br><span class="line"></span><br><span class="line">    <span class="built_in">exit</span>(<span class="number">0</span>);</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>编译运行:</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">leeyang <span class="keyword">in</span> ~/Downloads/阅读计划/MasteringGo/temp λ gcc -o willusego willusego.c  ./usedByC.o           </span><br><span class="line">leeyang <span class="keyword">in</span> ~/Downloads/阅读计划/MasteringGo/temp λ ./willusego </span><br><span class="line">max length word length is 11</span><br></pre></td></tr></table></figure>
+<p><code>defer</code> 关键字</p>
+<blockquote>
+<p>The defer keyword postpones the execution of a function until the surrounding function<br>returns. It is widely used in file input and output operations because it saves you from<br>having to remember when to close an opened file: the defer keyword allows you to put the<br>function call that closes an opened file near to the function call that opened it.</p>
+</blockquote>
+<blockquote>
+<p>It is very important to remember that deferred functions are executed in Last In First Out<br>(LIFO) order after the return of the surrounding function. Put simply, this means that if you<br>defer function f1() first, function f2() second, and function f3() third in the same<br>surrounding function, when the surrounding function is about to return, function f3() will<br>be executed first, function f2() will be executed second, and function f1() will be the last<br>one to get executed.</p>
+</blockquote>
+<p><code>defer</code> 的语句多数用于资源管理，在函数返回前执行，和栈类似，先进后出，最后放进去的先执行。</p>
+<p>实例代码:</p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> main</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> (</span><br><span class="line">    <span class="string">"fmt"</span></span><br><span class="line">)</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">f1</span><span class="params">()</span></span> &#123;</span><br><span class="line">    <span class="comment">// 从  3 - 0</span></span><br><span class="line">    <span class="keyword">for</span> i := <span class="number">0</span>; i &lt; <span class="number">4</span>; i++ &#123;</span><br><span class="line">        <span class="keyword">defer</span> fmt.Print(<span class="string">"f1:"</span>, i, <span class="string">" "</span>)</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">f2</span><span class="params">()</span></span> &#123;</span><br><span class="line">    <span class="comment">// defer 一个无参数的匿名函数, 相当于一个空循环 最后执行defer时候 i=4</span></span><br><span class="line">    <span class="keyword">for</span> i := <span class="number">0</span>; i &lt; <span class="number">4</span>; i++ &#123;</span><br><span class="line">        <span class="keyword">defer</span> <span class="function"><span class="keyword">func</span><span class="params">()</span></span> &#123;</span><br><span class="line">                fmt.Print(<span class="string">"f2:"</span>, i, <span class="string">" "</span>)</span><br><span class="line">            &#125;()</span><br><span class="line">    &#125;</span><br><span class="line">    fmt.Println()</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">f3</span><span class="params">()</span></span> &#123;</span><br><span class="line">    <span class="comment">// 有参数的匿名函数 结果正常 从 1 - 4</span></span><br><span class="line">    <span class="keyword">for</span> i := <span class="number">4</span>; i &gt; <span class="number">0</span>; i-- &#123;</span><br><span class="line">        <span class="keyword">defer</span> <span class="function"><span class="keyword">func</span><span class="params">(n <span class="keyword">int</span>)</span></span> &#123;</span><br><span class="line">            fmt.Print(<span class="string">"f3:"</span>, n, <span class="string">" "</span>)</span><br><span class="line">        &#125;(i)</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">main</span><span class="params">()</span></span> &#123;</span><br><span class="line">    f1()</span><br><span class="line">    f2()</span><br><span class="line">    fmt.Println()</span><br><span class="line">    f3()</span><br><span class="line">    fmt.Println()</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>Panic and Recover 关键字</p>
+<p>说明:</p>
+<blockquote>
+<p>Strictly speaking, panic() is a built-in Go function that terminates the current flow of a Go<br>program and starts panicking! On the other hand, the recover() function, which is also a<br>built-in Go function, allows you to take back the control of a goroutine that just panicked<br>using panic().</p>
+</blockquote>
+<p>只有 <code>panic</code> 语句,会让程序直接退出:</p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> main</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> (</span><br><span class="line">    <span class="string">"fmt"</span></span><br><span class="line">)</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">main</span><span class="params">()</span></span> &#123;</span><br><span class="line">    <span class="built_in">panic</span>(<span class="string">"I have to leave."</span>)</span><br><span class="line">    fmt.Println(<span class="string">"never execute here!"</span>)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>执行结果:</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">λ go run temp.go        </span><br><span class="line">panic: I have to leave.</span><br><span class="line"></span><br><span class="line">goroutine 1 [running]:</span><br><span class="line">main.main()</span><br><span class="line">    /Users/leeyang/Downloads/阅读计划/MasteringGo/temp.go:8 +0x39</span><br><span class="line"><span class="built_in">exit</span> status 2</span><br><span class="line">leeyang <span class="keyword">in</span> ~/Downloads/阅读计划/MasteringGo λ</span><br></pre></td></tr></table></figure>
+<p><code>panic</code> 和 <code>recover</code> 一起使用:</p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> main</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> (</span><br><span class="line">    <span class="string">"fmt"</span></span><br><span class="line">)</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">a</span><span class="params">()</span></span> &#123;</span><br><span class="line">    fmt.Println(<span class="string">"Inside a()"</span>)</span><br><span class="line">    <span class="comment">// 相当于捕获了 b 抛出的异常</span></span><br><span class="line">    <span class="keyword">defer</span> <span class="function"><span class="keyword">func</span><span class="params">()</span></span> &#123;</span><br><span class="line">        <span class="keyword">if</span> c := <span class="built_in">recover</span>(); c != <span class="literal">nil</span> &#123;</span><br><span class="line">            fmt.Println(<span class="string">"Recover inside a()!"</span>)</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;()</span><br><span class="line"></span><br><span class="line">    fmt.Println(<span class="string">"About to call b()"</span>)</span><br><span class="line">    b()</span><br><span class="line">    fmt.Println(<span class="string">"b() exited!"</span>)</span><br><span class="line">    fmt.Println(<span class="string">"Exiting a()"</span>)</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">b</span><span class="params">()</span></span> &#123;</span><br><span class="line">    fmt.Println(<span class="string">"Inside b()"</span>)</span><br><span class="line">    <span class="built_in">panic</span>(<span class="string">"Panic in b()!"</span>)</span><br><span class="line">    fmt.Println(<span class="string">"Exiting b()"</span>)</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">main</span><span class="params">()</span></span> &#123;</span><br><span class="line">    a()</span><br><span class="line">    fmt.Println(<span class="string">"main exit."</span>)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p><code>strace -c</code> 可以统计每个系统调用的次数等:</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line">$ strace -c ls</span><br><span class="line">usedByC.go  usedByC.h  usedByC.o  willusego  willusego.c</span><br><span class="line">% time     seconds  usecs/call     calls    errors syscall</span><br><span class="line">------ ----------- ----------- --------- --------- ----------------</span><br><span class="line"> 50.00    0.000022           2        12           open</span><br><span class="line"> 50.00    0.000022           1        16           mprotect</span><br><span class="line">  0.00    0.000000           0        10           <span class="built_in">read</span></span><br><span class="line">  0.00    0.000000           0         1           write</span><br><span class="line">  0.00    0.000000           0        14           close</span><br><span class="line">  0.00    0.000000           0        12           fstat</span><br><span class="line">  0.00    0.000000           0        28           mmap</span><br><span class="line">  0.00    0.000000           0         3           munmap</span><br><span class="line">  0.00    0.000000           0         3           brk</span><br><span class="line">  0.00    0.000000           0         2           rt_sigaction</span><br><span class="line">  0.00    0.000000           0         1           rt_sigprocmask</span><br><span class="line">  0.00    0.000000           0         2           ioctl</span><br><span class="line">  0.00    0.000000           0         1         1 access</span><br><span class="line">  0.00    0.000000           0         1           execve</span><br><span class="line">  0.00    0.000000           0         1           fcntl</span><br><span class="line">  0.00    0.000000           0         2           getdents</span><br><span class="line">  0.00    0.000000           0         1           getrlimit</span><br><span class="line">  0.00    0.000000           0         1           statfs</span><br><span class="line">  0.00    0.000000           0         1           arch_prctl</span><br><span class="line">  0.00    0.000000           0         2         1 futex</span><br><span class="line">  0.00    0.000000           0         1           set_tid_address</span><br><span class="line">  0.00    0.000000           0         1           set_robust_list</span><br><span class="line">------ ----------- ----------- --------- --------- ----------------</span><br><span class="line">100.00    0.000044                   116         2 total</span><br></pre></td></tr></table></figure>
+<p><code>runtime</code> 包获取系统相关信息:</p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> main</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> (</span><br><span class="line">    <span class="string">"fmt"</span></span><br><span class="line">    <span class="string">"runtime"</span></span><br><span class="line">)</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">main</span><span class="params">()</span></span> &#123;</span><br><span class="line">    fmt.Print(<span class="string">"You are using "</span>, runtime.Compiler, <span class="string">" "</span>)</span><br><span class="line">    fmt.Println(<span class="string">"on a"</span>, runtime.GOARCH, <span class="string">"machine"</span>)</span><br><span class="line">    fmt.Println(<span class="string">"Using Go version"</span>, runtime.Version())</span><br><span class="line">    fmt.Println(<span class="string">"Number of CPUs:"</span>, runtime.NumCPU())</span><br><span class="line">    fmt.Println(<span class="string">"Number of Goroutines:"</span>, runtime.NumGoroutine())</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>运行结果:</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">λ go run temp.go</span><br><span class="line">You are using gc on a amd64 machine</span><br><span class="line">Using Go version go1.10.3</span><br><span class="line">Number of CPUs: 4</span><br><span class="line">Number of Goroutines: 1</span><br></pre></td></tr></table></figure>
+<p><code>Node Trees</code> 简介:</p>
+<blockquote>
+<p>A Go node is a struct with a large number of properties.Everything in a<br>Go program is being parsed and analyzed by the modules of the Go compiler according to<br>the grammar of the Go programming language. The final product of this analysis is a tree<br>that is specific to the provided Go code, and it represents the program in a different way<br>that is suited for the compiler rather than for the developer.</p>
+</blockquote>
+<p>使用 <code>$ go tool compile -W temp.go</code> 可以得到很多关于node的属性</p>
+<p>使用这个工具可以对代码进行一些分析:</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"> λ go tool compile -W temp.go | grep functionOne</span><br><span class="line">before functionOne</span><br><span class="line">after walk functionOne</span><br><span class="line">.   .   NAME-main.functionOne a(<span class="literal">true</span>) l(7) x(0) class(PFUNC) tc(1) used FUNC-func(int)</span><br><span class="line">.   .   NAME-main.functionOne a(<span class="literal">true</span>) l(7) x(0) class(PFUNC) tc(1) used FUNC-func(int)</span><br><span class="line">.   .   NAME-main.functionOne a(<span class="literal">true</span>) l(7) x(0) class(PFUNC) tc(1) used FUNC-func(int)</span><br><span class="line">.   .   NAME-main.functionOne a(<span class="literal">true</span>) l(7) x(0) class(PFUNC) tc(1) used FUNC-func(int)</span><br></pre></td></tr></table></figure>
+<p><code>runtime.Breakpoint</code> 可以加断点:</p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="keyword">package</span> main</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> (</span><br><span class="line">    <span class="string">"fmt"</span></span><br><span class="line">    <span class="string">"runtime"</span></span><br><span class="line">)</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">functionOne</span><span class="params">(x <span class="keyword">int</span>)</span></span> &#123;</span><br><span class="line">    fmt.Println(x)</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">main</span><span class="params">()</span></span> &#123;</span><br><span class="line">    varOne := <span class="number">7788</span></span><br><span class="line">    varTwo := <span class="number">6699</span></span><br><span class="line">    fmt.Println(<span class="string">"Hello there!"</span>)</span><br><span class="line">    runtime.Breakpoint()</span><br><span class="line">    functionOne(varOne)</span><br><span class="line">    functionOne(varTwo)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>参考:<br><a href="https://karthikkaranth.me/blog/calling-c-code-from-go/" target="_blank" rel="noopener">https://karthikkaranth.me/blog/calling-c-code-from-go/</a><br><a href="https://tonybai.com/2012/09/26/interoperability-between-go-and-c/" target="_blank" rel="noopener">https://tonybai.com/2012/09/26/interoperability-between-go-and-c/</a><br><a href="http://bastengao.com/blog/2017/12/go-cgo-c.html" target="_blank" rel="noopener">http://bastengao.com/blog/2017/12/go-cgo-c.html</a><br><a href="http://fallthrough.io/blog/" target="_blank" rel="noopener">http://fallthrough.io/blog/</a><br><a href="https://www.cnblogs.com/magicsoar/p/7002467.html" target="_blank" rel="noopener">https://www.cnblogs.com/magicsoar/p/7002467.html</a><br><a href="https://golang.org/pkg/runtime/" target="_blank" rel="noopener">https://golang.org/pkg/runtime/</a></p>
 
-        <div class="article-info info-on-right">
-          
-          
+      
 
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+      
+
+      
+
+      
+        
+<div class="share-btn share-icons tooltip-left">
+  <div class="tooltip tooltip-east">
+    <span class="tooltip-item">
+      <a href="javascript:;" class="share-sns share-outer">
+        <i class="icon icon-share"></i>
+      </a>
+    </span>
+    <span class="tooltip-content">
+      <div class="share-wrap">
+        <div class="share-icons">
+          <a class="weibo share-sns" href="javascript:;" data-type="weibo">
+            <i class="icon icon-weibo"></i>
+          </a>
+          <a class="weixin share-sns wxFab" href="javascript:;" data-type="weixin">
+            <i class="icon icon-weixin"></i>
+          </a>
+          <a class="qq share-sns" href="javascript:;" data-type="qq">
+            <i class="icon icon-qq"></i>
+          </a>
+          <a class="douban share-sns" href="javascript:;" data-type="douban">
+            <i class="icon icon-douban"></i>
+          </a>
+          <a class="qzone share-sns" href="javascript:;" data-type="qzone">
+            <i class="icon icon-qzone"></i>
+          </a>
+          <a class="facebook share-sns" href="javascript:;" data-type="facebook">
+            <i class="icon icon-facebook"></i>
+          </a>
+          <a class="twitter share-sns" href="javascript:;" data-type="twitter">
+            <i class="icon icon-twitter"></i>
+          </a>
+          <a class="google share-sns" href="javascript:;" data-type="google">
+            <i class="icon icon-google"></i>
+          </a>
         </div>
-        <div class="clearfix"></div>
-    </header>
+      </div>
+    </span>
+  </div>
+</div>
+
+<div class="page-modal wx-share js-wx-box">
+    <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <div class="wx-qrcode">
+      <img src="//pan.baidu.com/share/qrcode?url=http://yoursite.com/2018/08/26/Mastering-Go笔记二/" alt="微信分享二维码">
+    </div>
+</div>
+
+<div class="mask js-mask"></div>
+      
+      <div class="clearfix"></div>
+    </div>
   </div>
 </article>
+
   
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2018/08/22/Go语言安装第三方包问题-and-gore-使用/" class="archive-article-date">
-  	<time datetime="2018-08-22T14:34:57.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-08-22</time>
-</a>
+<nav id="article-nav">
+  
+  
+    <a href="/2018/08/22/Go语言安装第三方包问题-and-gore-使用/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">Go语言安装第三方包问题 and gore 使用</div>
+      <i class="icon-circle-right"></i>
+    </a>
+  
+</nav>
+
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
         </div>
-    	 
+        
+        
+    </div>
+</aside>
+
+
+
   
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2018/08/22/Go语言安装第三方包问题-and-gore-使用/">Go语言安装第三方包问题 and gore 使用</a>
-    </h1>
+  
   
 
-        <div class="article-info info-on-right">
-          
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2018/08/22/Mastering-Go笔记一/" class="archive-article-date">
-  	<time datetime="2018-08-22T14:21:01.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-08-22</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2018/08/22/Mastering-Go笔记一/">Mastering_Go笔记一</a>
-    </h1>
   
 
-        <div class="article-info info-on-right">
-          
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2018/08/15/GoldbachConjecture/" class="archive-article-date">
-  	<time datetime="2018-08-15T03:33:39.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-08-15</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2018/08/15/GoldbachConjecture/">GoldbachConjecture 哥德巴赫猜想</a>
-    </h1>
   
 
-        <div class="article-info info-on-right">
-          
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
   
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2018/08/13/LeetCode-Count-and-say/" class="archive-article-date">
-  	<time datetime="2018-08-13T15:39:40.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-08-13</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2018/08/13/LeetCode-Count-and-say/">LeetCode_Count_and_say</a>
-    </h1>
-  
-
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">LeetCode</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2018/08/13/hello-world/" class="archive-article-date">
-  	<time datetime="2018-08-13T14:51:25.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-08-13</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2018/08/13/hello-world/">Hello World</a>
-    </h1>
-  
-
-        <div class="article-info info-on-right">
-          
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-  
-    </div></section>
-  
-
-    
 
 
           </div>
@@ -335,8 +389,8 @@
 	var yiliaConfig = {
 		mathjax: true,
 		isHome: false,
-		isPost: false,
-		isArchive: true,
+		isPost: true,
+		isArchive: false,
 		isTag: false,
 		isCategory: false,
 		open_in_new: true,
