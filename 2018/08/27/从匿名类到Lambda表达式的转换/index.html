@@ -6,19 +6,17 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
   <link rel="dns-prefetch" href="http://yoursite.com">
-  <title>Hello World | ZxAndLy</title>
+  <title>从匿名类到Lambda表达式的转换 | ZxAndLy</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="Take a desk, start a family. For each other.1print(&quot;Hello world!&quot;) 12345public class HelloWorld&amp;#123;    public static void main(String[] args)&amp;#123;        System.out.println(&quot;Hello world!&quot;);    &amp;#12">
+  <meta name="keywords" content="Java8">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Hello World">
-<meta property="og:url" content="http://yoursite.com/2018/08/13/hello-world/index.html">
+<meta property="og:title" content="从匿名类到Lambda表达式的转换">
+<meta property="og:url" content="http://yoursite.com/2018/08/27/从匿名类到Lambda表达式的转换/index.html">
 <meta property="og:site_name" content="ZxAndLy">
-<meta property="og:description" content="Take a desk, start a family. For each other.1print(&quot;Hello world!&quot;) 12345public class HelloWorld&amp;#123;    public static void main(String[] args)&amp;#123;        System.out.println(&quot;Hello world!&quot;);    &amp;#12">
 <meta property="og:locale" content="default">
-<meta property="og:updated_time" content="2018-08-14T14:18:45.000Z">
+<meta property="og:updated_time" content="2018-08-27T07:57:42.772Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Hello World">
-<meta name="twitter:description" content="Take a desk, start a family. For each other.1print(&quot;Hello world!&quot;) 12345public class HelloWorld&amp;#123;    public static void main(String[] args)&amp;#123;        System.out.println(&quot;Hello world!&quot;);    &amp;#12">
+<meta name="twitter:title" content="从匿名类到Lambda表达式的转换">
   
     <link rel="alternative" href="/atom.xml" title="ZxAndLy" type="application/atom+xml">
   
@@ -128,29 +126,31 @@
             <canvas data-colors="#eaeaea" data-sectionHeight="100" data-contentId="js-content" id="myCanvas1" class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
-            <article id="post-hello-world" class="article article-type-post " itemscope itemprop="blogPost">
+            <article id="post-从匿名类到Lambda表达式的转换" class="article article-type-post " itemscope itemprop="blogPost">
   <div class="article-inner">
     
       <header class="article-header">
         
   
     <h1 class="article-title" itemprop="name">
-      Hello World
+      从匿名类到Lambda表达式的转换
     </h1>
   
 
         
-        <a href="/2018/08/13/hello-world/" class="archive-article-date">
-  	<time datetime="2018-08-13T14:51:25.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-08-13</time>
+        <a href="/2018/08/27/从匿名类到Lambda表达式的转换/" class="archive-article-date">
+  	<time datetime="2018-08-27T07:51:27.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-08-27</time>
 </a>
         
       </header>
     
     <div class="article-entry" itemprop="articleBody">
       
-        <h2 id="Take-a-desk-start-a-family-For-each-other"><a href="#Take-a-desk-start-a-family-For-each-other" class="headerlink" title="Take a desk, start a family. For each other."></a>Take a desk, start a family. For each other.</h2><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">print(<span class="string">"Hello world!"</span>)</span><br></pre></td></tr></table></figure>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">HelloWorld</span></span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span></span>&#123;</span><br><span class="line">        System.out.println(<span class="string">"Hello world!"</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> main</span><br><span class="line"><span class="keyword">import</span> <span class="string">"fmt"</span></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">main</span><span class="params">()</span></span>&#123;</span><br><span class="line">    fmt.Println(<span class="string">"Hello world! 你好 世界！"</span>)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+        <hr>
+<a id="more"></a>
+<p>值得尝试的第一种重构，也是简单的方式，是将实现单一抽象方法的匿名类转换为Lambda表达式。比如，创建一个Runnable对象的匿名类，<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">Runnable r1= <span class="keyword">new</span> Runnable() &#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">run</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        System.out.println(<span class="string">"hello"</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>对应的Lambda表达式实现如下：<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Runnable r1 = () -&gt; System.out.println(<span class="string">"hello"</span>);</span><br></pre></td></tr></table></figure></p>
+
       
 
       
@@ -158,6 +158,17 @@
     <div class="article-info article-info-index">
       
       
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">Java8</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
       
 
       
@@ -208,7 +219,7 @@
     <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
     <p>扫一扫，分享到微信</p>
     <div class="wx-qrcode">
-      <img src="//pan.baidu.com/share/qrcode?url=http://yoursite.com/2018/08/13/hello-world/" alt="微信分享二维码">
+      <img src="//pan.baidu.com/share/qrcode?url=http://yoursite.com/2018/08/27/从匿名类到Lambda表达式的转换/" alt="微信分享二维码">
     </div>
 </div>
 
@@ -222,15 +233,11 @@
   
 <nav id="article-nav">
   
-    <a href="/2018/08/13/LeetCode-Count-and-say/" id="article-nav-newer" class="article-nav-link-wrap">
-      <i class="icon-circle-left"></i>
-      <div class="article-nav-title">
-        
-          LeetCode_Count_and_say
-        
-      </div>
-    </a>
   
+    <a href="/2018/08/26/Mastering-Go笔记二/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">Mastering_Go笔记二</div>
+      <i class="icon-circle-right"></i>
+    </a>
   
 </nav>
 
