@@ -8,13 +8,13 @@
   <link rel="dns-prefetch" href="http://yoursite.com">
   <title>从匿名类到Lambda表达式的转换 | ZxAndLy</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="keywords" content="Java8">
+  <meta name="keywords" content="Java8实战">
 <meta property="og:type" content="article">
 <meta property="og:title" content="从匿名类到Lambda表达式的转换">
 <meta property="og:url" content="http://yoursite.com/2018/08/27/从匿名类到Lambda表达式的转换/index.html">
 <meta property="og:site_name" content="ZxAndLy">
 <meta property="og:locale" content="default">
-<meta property="og:updated_time" content="2018-08-27T09:34:10.978Z">
+<meta property="og:updated_time" content="2018-08-28T06:11:24.827Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="从匿名类到Lambda表达式的转换">
   
@@ -165,9 +165,8 @@
 <p>现在，你再传递一个匿名类实现的Task，不会碰到了任何问题：<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">doSomething(<span class="keyword">new</span> Task() &#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">execute</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        System.out.println(<span class="string">"Danger"</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure></p>
 <p>但是将这种匿名类转换为Lambda表达式时，就导致了一种晦涩的方法调用，因为Runnable和Task都是合法的目标类型：<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">doSomething(() -&gt; System.out.println(<span class="string">"Danger"</span>));</span><br></pre></td></tr></table></figure></p>
 <p>错误信息<br><em>Error:(12, 9) java: 对doSomething的引用不明确 Test 中的方法 doSomething(java.lang.Runnable) 和 Test 中的方法 doSomething(Task) 都匹配</em></p>
-<p>你可以对Task尝试使用显示的类型转换来解决这种模棱两可的情况：</p>
-<pre><code class="java">
-</code></pre>
+<p>可以对Task尝试使用显式的类型转换来解决这种模棱两可的情况：<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">doSomething((Task)() -&gt; System.out.println(<span class="string">"Danger"</span>));</span><br></pre></td></tr></table></figure></p>
+<p>但是不要因此而放弃对Lambda的尝试。好消息是，目前大多数的集成开发环境，比如NetBeans和Intellij都支持这种重构，它们可以自动帮你检查，避免发生这些问题。</p>
 
       
 
@@ -181,7 +180,7 @@
 		<ul class="article-tag-list">
 			 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">Java8</a>
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">Java8实战</a>
         		</li>
       		
 		</ul>
@@ -409,11 +408,11 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">Java8</a>
+                <a href="javascript:void(0)" class="js-tag color3">Java8实战</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">Java8实战</a>
+                <a href="javascript:void(0)" class="js-tag color1">Java8</a>
               </li>
             
             <div class="clearfix"></div>
