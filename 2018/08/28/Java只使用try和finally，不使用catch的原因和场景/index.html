@@ -8,18 +8,18 @@
   <link rel="dns-prefetch" href="http://yoursite.com">
   <title>Java只使用try和finally，不使用catch的原因和场景 | ZxAndLy</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="JDK开发工具包中，很多异常都使用了如下结构，如AbstractExecutorService，即只有try和finally，没有catch12345678910111213141516//reentrant	英[ri:&apos;entrənt] 美[rɪ&apos;entrənt] 即 en entrant 再进入，可重入class X &amp;#123;    private final ReentrantLock">
+  <meta name="description" content="原文地址">
 <meta name="keywords" content="Java">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Java只使用try和finally，不使用catch的原因和场景">
 <meta property="og:url" content="http://yoursite.com/2018/08/28/Java只使用try和finally，不使用catch的原因和场景/index.html">
 <meta property="og:site_name" content="ZxAndLy">
-<meta property="og:description" content="JDK开发工具包中，很多异常都使用了如下结构，如AbstractExecutorService，即只有try和finally，没有catch12345678910111213141516//reentrant	英[ri:&apos;entrənt] 美[rɪ&apos;entrənt] 即 en entrant 再进入，可重入class X &amp;#123;    private final ReentrantLock">
+<meta property="og:description" content="原文地址">
 <meta property="og:locale" content="default">
-<meta property="og:updated_time" content="2018-08-28T07:11:48.811Z">
+<meta property="og:updated_time" content="2018-08-28T07:13:44.368Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Java只使用try和finally，不使用catch的原因和场景">
-<meta name="twitter:description" content="JDK开发工具包中，很多异常都使用了如下结构，如AbstractExecutorService，即只有try和finally，没有catch12345678910111213141516//reentrant	英[ri:&apos;entrənt] 美[rɪ&apos;entrənt] 即 en entrant 再进入，可重入class X &amp;#123;    private final ReentrantLock">
+<meta name="twitter:description" content="原文地址">
   
     <link rel="alternative" href="/atom.xml" title="ZxAndLy" type="application/atom+xml">
   
@@ -149,7 +149,7 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <a id="more"></a>
+        <p><a href="https://blog.csdn.net/aitangyong/article/details/38146833?utm_source=tuicool&amp;utm_medium=referral" target="_blank" rel="noopener">原文地址</a><br><a id="more"></a></p>
 <p>JDK开发工具包中，很多异常都使用了如下结构，如AbstractExecutorService，即只有try和finally，没有catch<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//reentrant	英[ri:'entrənt] 美[rɪ'entrənt] 即 en entrant 再进入，可重入</span></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">X</span> </span>&#123;</span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">final</span> ReentrantLock lock = <span class="keyword">new</span> ReentrantLock();</span><br><span class="line">    <span class="comment">//...</span></span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">m</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="comment">//block until condition holds</span></span><br><span class="line">        lock.lock(); </span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">try</span> &#123;</span><br><span class="line">        <span class="comment">//... methods body</span></span><br><span class="line">    &#125; <span class="keyword">finally</span> &#123;</span><br><span class="line">        lock.unlock();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
 <p>为什么要使用这种结构呢？有什么好处？先看下面的代码<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">testTryAndFinally</span><span class="params">(String name)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">try</span> &#123;</span><br><span class="line">        <span class="comment">//NullPointerException</span></span><br><span class="line">        name.length();</span><br><span class="line">    &#125; <span class="keyword">finally</span> &#123;</span><br><span class="line">        System.out.println(<span class="string">"aa"</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
 <p>传递null该方法的执行结果是：在控制台打印aa，并抛出NullPointerException。执行流程是先执行try块，出现异常后执行finally块，最后向调用者抛出try中的一场。这种执行结果是很正常的，因为没有catch异常处理器，所以该方法只能将产生的异常向外抛；因为有finally，所以会在方法返回抛出异常前，先执行finally代码块中的清理工作。</p>
