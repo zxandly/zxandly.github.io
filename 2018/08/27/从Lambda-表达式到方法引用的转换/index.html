@@ -8,18 +8,15 @@
   <link rel="dns-prefetch" href="http://yoursite.com">
   <title>从Lambda 表达式到方法引用的转换 | ZxAndLy</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="Lambda非常适用于需要传递代码片段的场景。不过，为了改善代码的可读性，请尽量使用方法引用。因为方法名往往能更直观地表达代码的意图。比如下面这段代码，功能是按照食物的热量级别对菜肴进行分类：12345678910111213Map&amp;lt;CaloricLevel, List&amp;lt;Dish&amp;gt;&amp;gt; dishesByCaloricLevel =      menu.stream()">
-<meta name="keywords" content="Java8实战">
+  <meta name="keywords" content="Java8实战">
 <meta property="og:type" content="article">
 <meta property="og:title" content="从Lambda 表达式到方法引用的转换">
 <meta property="og:url" content="http://yoursite.com/2018/08/27/从Lambda-表达式到方法引用的转换/index.html">
 <meta property="og:site_name" content="ZxAndLy">
-<meta property="og:description" content="Lambda非常适用于需要传递代码片段的场景。不过，为了改善代码的可读性，请尽量使用方法引用。因为方法名往往能更直观地表达代码的意图。比如下面这段代码，功能是按照食物的热量级别对菜肴进行分类：12345678910111213Map&amp;lt;CaloricLevel, List&amp;lt;Dish&amp;gt;&amp;gt; dishesByCaloricLevel =      menu.stream()">
 <meta property="og:locale" content="default">
-<meta property="og:updated_time" content="2018-08-28T07:27:52.585Z">
+<meta property="og:updated_time" content="2018-08-28T07:29:36.587Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="从Lambda 表达式到方法引用的转换">
-<meta name="twitter:description" content="Lambda非常适用于需要传递代码片段的场景。不过，为了改善代码的可读性，请尽量使用方法引用。因为方法名往往能更直观地表达代码的意图。比如下面这段代码，功能是按照食物的热量级别对菜肴进行分类：12345678910111213Map&amp;lt;CaloricLevel, List&amp;lt;Dish&amp;gt;&amp;gt; dishesByCaloricLevel =      menu.stream()">
   
     <link rel="alternative" href="/atom.xml" title="ZxAndLy" type="application/atom+xml">
   
@@ -149,7 +146,8 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <a id="more"></a>
+        <hr>
+<a id="more"></a>
 <p>Lambda非常适用于需要传递代码片段的场景。不过，为了改善代码的可读性，请尽量使用方法引用。因为方法名往往能更直观地表达代码的意图。比如下面这段代码，功能是按照食物的热量级别对菜肴进行分类：<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">Map&lt;CaloricLevel, List&lt;Dish&gt;&gt; dishesByCaloricLevel = </span><br><span class="line">     menu.stream()</span><br><span class="line">         .collect(</span><br><span class="line">             groupingBy(dish -&gt; &#123;</span><br><span class="line">                 <span class="keyword">if</span> (dish.getCalories() &lt;= <span class="number">400</span>) &#123;</span><br><span class="line">                     <span class="keyword">return</span> CaloricLevel.DIET;</span><br><span class="line">                 &#125; <span class="keyword">else</span> <span class="keyword">if</span> (dish.getCalories() &lt;= <span class="number">700</span>) &#123;</span><br><span class="line">                     <span class="keyword">return</span> CaloricLevel.NORMAL;</span><br><span class="line">                 &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">                     <span class="keyword">return</span> CaloricLevel.FAT;</span><br><span class="line">                 &#125;</span><br><span class="line">             &#125;)</span><br><span class="line">         );</span><br></pre></td></tr></table></figure></p>
 <p>可以将Lambda表达式的内容抽取到一个单独的方法中，将其作为参数传递给groupingBy方法。变换之后，代码变得更加简洁，程序的意图也更加清晰了：<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">Map&lt;CaloricLevel, List&lt;Dish&gt;&gt; dishesByCaloricLevel = </span><br><span class="line">     menu.stream().collect(groupingBy(Dish::getCaloricLevel));</span><br></pre></td></tr></table></figure></p>
 <p>为了实现这个方案，还需要在Dish类中添加getCaloricLevel方法：<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Dish</span> </span>&#123;</span><br><span class="line">    ...</span><br><span class="line">    <span class="keyword">public</span> Map&lt;CaloricLevel, List&lt;Dish&gt;&gt; getCaloricLevel() &#123;</span><br><span class="line">        <span class="keyword">if</span> (dish.getCalories() &lt;= <span class="number">400</span>) &#123;</span><br><span class="line">            <span class="keyword">return</span> CaloricLevel.DIET;</span><br><span class="line">            &#125; <span class="keyword">else</span> <span class="keyword">if</span> (dish.getCalories() &lt;= <span class="number">700</span>) &#123;</span><br><span class="line">                <span class="keyword">return</span> CaloricLevel.NORMAL;</span><br><span class="line">                &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">                    <span class="keyword">return</span> CaloricLevel.FAT;</span><br><span class="line">                    &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>

@@ -8,18 +8,15 @@
   <link rel="dns-prefetch" href="http://yoursite.com">
   <title>从匿名类到Lambda表达式的转换 | ZxAndLy</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="值得尝试的第一种重构，也是简单的方式，是将实现单一抽象方法的匿名类转换为Lambda表达式。比如，创建一个Runnable对象的匿名类，12345Runnable r1= new Runnable() &amp;#123;    public void run() &amp;#123;        System.out.println(&quot;hello&quot;);    &amp;#125;&amp;#125; 对应的Lambda表达">
-<meta name="keywords" content="Java8实战">
+  <meta name="keywords" content="Java8实战">
 <meta property="og:type" content="article">
 <meta property="og:title" content="从匿名类到Lambda表达式的转换">
 <meta property="og:url" content="http://yoursite.com/2018/08/27/从匿名类到Lambda表达式的转换/index.html">
 <meta property="og:site_name" content="ZxAndLy">
-<meta property="og:description" content="值得尝试的第一种重构，也是简单的方式，是将实现单一抽象方法的匿名类转换为Lambda表达式。比如，创建一个Runnable对象的匿名类，12345Runnable r1= new Runnable() &amp;#123;    public void run() &amp;#123;        System.out.println(&quot;hello&quot;);    &amp;#125;&amp;#125; 对应的Lambda表达">
 <meta property="og:locale" content="default">
-<meta property="og:updated_time" content="2018-08-28T07:28:07.125Z">
+<meta property="og:updated_time" content="2018-08-28T07:29:07.434Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="从匿名类到Lambda表达式的转换">
-<meta name="twitter:description" content="值得尝试的第一种重构，也是简单的方式，是将实现单一抽象方法的匿名类转换为Lambda表达式。比如，创建一个Runnable对象的匿名类，12345Runnable r1= new Runnable() &amp;#123;    public void run() &amp;#123;        System.out.println(&quot;hello&quot;);    &amp;#125;&amp;#125; 对应的Lambda表达">
   
     <link rel="alternative" href="/atom.xml" title="ZxAndLy" type="application/atom+xml">
   
@@ -149,7 +146,8 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <a id="more"></a>
+        <hr>
+<a id="more"></a>
 <p>值得尝试的第一种重构，也是简单的方式，是将实现单一抽象方法的匿名类转换为Lambda表达式。比如，创建一个Runnable对象的匿名类，<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">Runnable r1= <span class="keyword">new</span> Runnable() &#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">run</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        System.out.println(<span class="string">"hello"</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
 <p>对应的Lambda表达式实现如下：<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Runnable r2 = () -&gt; System.out.println(<span class="string">"hello"</span>);</span><br></pre></td></tr></table></figure></p>
 <p>但是某些情况下，将匿名类转换为Lambda表达式可能是一个比较复杂的过程。</p>
