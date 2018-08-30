@@ -6,7 +6,7 @@
       <title>Swagger</title>
       <link href="/2018/08/30/Swagger/"/>
       <url>/2018/08/30/Swagger/</url>
-      <content type="html"><![CDATA[<p>Swagger<br><a id="more"></a><br>随着互联网技术的发展，现在的网站架构基本都由原来的后端渲染，变成了前端渲染、前后端分离的形态，而且前端技术和后端技术在各自的道路上越走越远。前端和后端的唯一联系变成了API接口，API文档变成了前后端开发人员联系的纽带，swagger就是一款更好地书写API文档的框架。</p><h2 id="其他API文档工具"><a href="#其他API文档工具" class="headerlink" title="其他API文档工具"></a>其他API文档工具</h2><p>没有API文档工具之前，大家都是手写API文档的，有在confluence上写的，有在对应的项目目录下readme.md上写的。</p><p>书写API文档的工具有很多，但是能称之为“框架”的，估计只有Swagger了。<br>在此之前先介绍一款其他的API文档工具，叫rap：解放生产力，代替手写API的web工具。RAP是由阿里开发的，<a href="https://github.com/thx/RAP" target="_blank" rel="noopener">github地址</a>。当然咯，RAP不可能只有线上版本，肯定可以部署到私服上：<a href="https://github.com/thx/RAP/wiki/deploy_manual_cn" target="_blank" rel="noopener">https://github.com/thx/RAP/wiki/deploy_manual_cn</a>.</p><h2 id="Swagger"><a href="#Swagger" class="headerlink" title="Swagger"></a>Swagger</h2><p>RAP挺好用的，但是和Swagger比起来有点轻量。下图是Swagger的生态使用图<br><img src="../../../public/img/Swagger.png"></p>]]></content>
+      <content type="html"><![CDATA[<p>Swagger<br><a id="more"></a><br>随着互联网技术的发展，现在的网站架构基本都由原来的后端渲染，变成了前端渲染、前后端分离的形态，而且前端技术和后端技术在各自的道路上越走越远。前端和后端的唯一联系变成了API接口，API文档变成了前后端开发人员联系的纽带，swagger就是一款更好地书写API文档的框架。</p><h2 id="其他API文档工具"><a href="#其他API文档工具" class="headerlink" title="其他API文档工具"></a>其他API文档工具</h2><p>没有API文档工具之前，大家都是手写API文档的，有在confluence上写的，有在对应的项目目录下readme.md上写的。</p><p>书写API文档的工具有很多，但是能称之为“框架”的，估计只有Swagger了。<br>在此之前先介绍一款其他的API文档工具，叫rap：解放生产力，代替手写API的web工具。RAP是由阿里开发的，<a href="https://github.com/thx/RAP" target="_blank" rel="noopener">github地址</a>。当然咯，RAP不可能只有线上版本，肯定可以部署到私服上：<a href="https://github.com/thx/RAP/wiki/deploy_manual_cn" target="_blank" rel="noopener">https://github.com/thx/RAP/wiki/deploy_manual_cn</a>.</p><h2 id="Swagger"><a href="#Swagger" class="headerlink" title="Swagger"></a>Swagger</h2><p>RAP挺好用的，但是和Swagger比起来有点轻量。下图是Swagger的生态使用图<br><img src="../../public/img/Swagger.png"></p>]]></content>
       
       <categories>
           
@@ -27,7 +27,7 @@
       <title>增加代码的灵活性</title>
       <link href="/2018/08/30/%E5%A2%9E%E5%8A%A0%E4%BB%A3%E7%A0%81%E7%9A%84%E7%81%B5%E6%B4%BB%E6%80%A7/"/>
       <url>/2018/08/30/%E5%A2%9E%E5%8A%A0%E4%BB%A3%E7%A0%81%E7%9A%84%E7%81%B5%E6%B4%BB%E6%80%A7/</url>
-      <content type="html"><![CDATA[<p>Lambda表达式 <strong>有利于行为参数化</strong>，可以使用不同的Lambda表达式表示不同的行为，并将它们作为参数传递给函数去处理执行。这种方式<br><a id="more"></a><br>可以帮助我们淡定从容的面对需求的变化。</p>]]></content>
+      <content type="html"><![CDATA[<p>Lambda表达式 <strong>有利于行为参数化</strong>，可以使用不同的Lambda表达式表示不同的行为，并将它们作为参数传递给函数去处理执行。这种方式<br><a id="more"></a><br>可以帮助我们淡定从容的面对需求的变化。比如，可以用多种方式为Predicate创建筛选条件，或者使用<br>看看有哪些模式可以应用到代码中，享受Lambda表达式带来的便利。</p><h3 id="1-采用函数接口"><a href="#1-采用函数接口" class="headerlink" title="1.采用函数接口"></a>1.采用函数接口</h3><h3 id="2-有条件的延迟执行"><a href="#2-有条件的延迟执行" class="headerlink" title="2.有条件的延迟执行"></a>2.有条件的延迟执行</h3><h3 id="3-环绕执行"><a href="#3-环绕执行" class="headerlink" title="3.环绕执行"></a>3.环绕执行</h3>]]></content>
       
       <categories>
           
