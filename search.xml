@@ -3,6 +3,29 @@
   
     
     <entry>
+      <title>使用Lambda重构面向对象的设计模式</title>
+      <link href="/2018/09/04/%E4%BD%BF%E7%94%A8Lambda%E9%87%8D%E6%9E%84%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1%E7%9A%84%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/"/>
+      <url>/2018/09/04/%E4%BD%BF%E7%94%A8Lambda%E9%87%8D%E6%9E%84%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1%E7%9A%84%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/</url>
+      <content type="html"><![CDATA[<hr><a id="more"></a><p>新的语言特性常常让现存的编程模式或设计黯然失色。比如，Java5中引入了for-each循环，由于它的稳定性和简洁性，已经替代了很多显式使用迭代器的情形。Java7中推出的菱形操作符（&lt;&gt;）让大家在创建实例时无需显式使用泛型，一定程度上推动了Java程序员们采用类型接口（type interface）进行程序设计。</p><p>对设计经验的归纳总结被称为<a href="设计模式">http://wiki.c2.com/?GangOfFour</a>。设计软件时，可以复用这些方式方法来解决一些常见问题。这看起来像传统建筑工程师的工作方式，对典型的场景（比如悬挂桥、拱桥等）都定义有可重用的解决方案。例如，<em>访问者模式</em>常用于分离程序的算法和它的操作对象。<em>单例模式</em>一般用于限制类的实例化，仅生成一份对象。</p><p>Lambda表达式为程序员的工具箱又新添加了一件利器。它们为解决传统设计模式所面对的问题提供了新的解决方案，不但如此，采用这些方案往往更高效、更简单。使用Lambda表达式后，很多现存的略显臃肿的面向对象设计模式能够用更精简的方式实现了。针对五个设计模式展开讨论，分别是：</p><ul><li>策略模式</li><li>模板模式</li><li>观察者模式</li><li>责任链模式</li><li>工厂模式<br>接下来会展示Lambda表达式是如何另辟蹊径解决设计模式原来试图解决的问题的。</li></ul>]]></content>
+      
+      <categories>
+          
+          <category> 学习笔记 </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> Java8实战 </tag>
+            
+            <tag> 8章 </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    <entry>
       <title>Swagger</title>
       <link href="/2018/08/30/Swagger/"/>
       <url>/2018/08/30/Swagger/</url>
