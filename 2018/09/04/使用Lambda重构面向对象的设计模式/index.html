@@ -14,7 +14,7 @@
 <meta property="og:url" content="http://yoursite.com/2018/09/04/使用Lambda重构面向对象的设计模式/index.html">
 <meta property="og:site_name" content="ZxAndLy">
 <meta property="og:locale" content="default">
-<meta property="og:updated_time" content="2018-09-04T09:01:39.398Z">
+<meta property="og:updated_time" content="2018-09-04T09:24:42.367Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="使用Lambda重构面向对象的设计模式">
   
@@ -168,14 +168,24 @@
         <hr>
 <a id="more"></a>
 <p>新的语言特性常常让现存的编程模式或设计黯然失色。比如，Java5中引入了for-each循环，由于它的稳定性和简洁性，已经替代了很多显式使用迭代器的情形。Java7中推出的菱形操作符（&lt;&gt;）让大家在创建实例时无需显式使用泛型，一定程度上推动了Java程序员们采用类型接口（type interface）进行程序设计。</p>
-<p>对设计经验的归纳总结被称为<a href="设计模式">http://wiki.c2.com/?GangOfFour</a>。设计软件时，可以复用这些方式方法来解决一些常见问题。这看起来像传统建筑工程师的工作方式，对典型的场景（比如悬挂桥、拱桥等）都定义有可重用的解决方案。例如，<em>访问者模式</em>常用于分离程序的算法和它的操作对象。<em>单例模式</em>一般用于限制类的实例化，仅生成一份对象。</p>
+<p>对设计经验的归纳总结被称为<a href="http://wiki.c2.com/?GangOfFour" target="_blank" rel="noopener">设计模式</a>。设计软件时，可以复用这些方式方法来解决一些常见问题。这看起来像传统建筑工程师的工作方式，对典型的场景（比如悬挂桥、拱桥等）都定义有可重用的解决方案。例如，<em>访问者模式</em>常用于分离程序的算法和它的操作对象。<em>单例模式</em>一般用于限制类的实例化，仅生成一份对象。</p>
 <p>Lambda表达式为程序员的工具箱又新添加了一件利器。它们为解决传统设计模式所面对的问题提供了新的解决方案，不但如此，采用这些方案往往更高效、更简单。使用Lambda表达式后，很多现存的略显臃肿的面向对象设计模式能够用更精简的方式实现了。针对五个设计模式展开讨论，分别是：</p>
 <ul>
 <li>策略模式</li>
 <li>模板模式</li>
 <li>观察者模式</li>
 <li>责任链模式</li>
-<li>工厂模式<br>接下来会展示Lambda表达式是如何另辟蹊径解决设计模式原来试图解决的问题的。</li>
+<li>工厂模式<br>接下来会展示Lambda表达式是如何另辟蹊径解决设计模式原来试图解决的问题的。<h2 id="1-策略模式"><a href="#1-策略模式" class="headerlink" title="1.策略模式"></a>1.策略模式</h2><a href="https://zh.wikipedia.org/wiki/%E7%AD%96%E7%95%A5%E6%A8%A1%E5%BC%8F" target="_blank" rel="noopener">策略模式</a>代表了解决一类算法的通用解决方案，你可以在运行时选择使用哪种方案。<blockquote>
+<p>策略模式作为一种软件设计模式，指对象有某个行为，但是在不同的场景中，该行为有不同的实现算法。比如每个人都要“交个人所得税”，但是&gt;“在美国交个人所得税”和“在中国交个人所得税”就有不同的算税方法。<br>策略模式：</p>
+<blockquote>
+<ul>
+<li>定义了一族算法（业务规则）；</li>
+<li>封装了每个算法；</li>
+<li>这族的算法可互换代替（interchangeable）。</li>
+</ul>
+</blockquote>
+</blockquote>
+</li>
 </ul>
 
       
