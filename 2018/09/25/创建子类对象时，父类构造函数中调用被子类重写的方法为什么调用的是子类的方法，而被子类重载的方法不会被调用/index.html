@@ -6,20 +6,20 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
   <link rel="dns-prefetch" href="http://yoursite.com">
-  <title>创建子类对象时，父类构造函数中调用被子类重写的方法为什么调用的是子类的方法，而被子类重载的方法不会被调用 | ZxAndLy</title>
+  <title>创建子类对象时，父类构造函数中调用被子类重写的方法为什么调用的 是子类的方法，而被子类重载的方法不会被调用 | ZxAndLy</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="父类构造函数中调用被子类重写的方法为什么调用的是子类的方法">
+  <meta name="description" content="原文链接">
 <meta name="keywords" content="Java,JVM">
 <meta property="og:type" content="article">
-<meta property="og:title" content="创建子类对象时，父类构造函数中调用被子类重写的方法为什么调用的是子类的方法，而被子类重载的方法不会被调用">
+<meta property="og:title" content="创建子类对象时，父类构造函数中调用被子类重写的方法为什么调用的 是子类的方法，而被子类重载的方法不会被调用">
 <meta property="og:url" content="http://yoursite.com/2018/09/25/创建子类对象时，父类构造函数中调用被子类重写的方法为什么调用的是子类的方法，而被子类重载的方法不会被调用/index.html">
 <meta property="og:site_name" content="ZxAndLy">
-<meta property="og:description" content="父类构造函数中调用被子类重写的方法为什么调用的是子类的方法">
+<meta property="og:description" content="原文链接">
 <meta property="og:locale" content="default">
-<meta property="og:updated_time" content="2018-09-25T07:09:24.076Z">
+<meta property="og:updated_time" content="2018-09-25T07:13:41.927Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="创建子类对象时，父类构造函数中调用被子类重写的方法为什么调用的是子类的方法，而被子类重载的方法不会被调用">
-<meta name="twitter:description" content="父类构造函数中调用被子类重写的方法为什么调用的是子类的方法">
+<meta name="twitter:title" content="创建子类对象时，父类构造函数中调用被子类重写的方法为什么调用的 是子类的方法，而被子类重载的方法不会被调用">
+<meta name="twitter:description" content="原文链接">
   
     <link rel="alternative" href="/atom.xml" title="ZxAndLy" type="application/atom+xml">
   
@@ -155,7 +155,7 @@
         
   
     <h1 class="article-title" itemprop="name">
-      创建子类对象时，父类构造函数中调用被子类重写的方法为什么调用的是子类的方法，而被子类重载的方法不会被调用
+      创建子类对象时，父类构造函数中调用被子类重写的方法为什么调用的 是子类的方法，而被子类重载的方法不会被调用
     </h1>
   
 
@@ -168,9 +168,9 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <p>父类构造函数中调用被子类重写的方法为什么调用的是子类的方法<br><a id="more"></a></p>
+        <p><a href="https://blog.csdn.net/qq_36819098/article/details/75146850" target="_blank" rel="noopener">原文链接</a><br><a id="more"></a></p>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Basic</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">add</span><span class="params">(<span class="keyword">int</span> i)</span> </span>&#123;</span><br><span class="line">        System.out.println(<span class="string">"Basic add"</span>);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="title">Basic</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        add(<span class="string">'a'</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">A</span> <span class="keyword">extends</span> <span class="title">Basic</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">add</span><span class="params">(<span class="keyword">int</span> i)</span> </span>&#123;</span><br><span class="line">        System.out.println(<span class="string">"A add"</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">B</span> <span class="keyword">extends</span> <span class="title">Basic</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">add</span><span class="params">(<span class="keyword">char</span> i)</span> </span>&#123;</span><br><span class="line">        System.out.println(<span class="string">"B add"</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Main</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">        A a = <span class="keyword">new</span> A();</span><br><span class="line">        B b = <span class="keyword">new</span> B();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p><em>为什么创建A对象的时候父类会调用子类方法，但是创建B对象父类会调用父类的方法？</em></p>
+<p><em>问题：为什么创建A对象的时候父类会调用子类方法，但是创建B对象父类会调用父类的方法？</em></p>
 <blockquote>
 <p>当子类被加载到内存方法区后，会继续加载父类到内存中。如果，子类重写了父类的方法，子类的方法引用会指向子类的方法，否则子类的方法引用会指向父类的方法引用。如果子类重载了父类的方法，则子类重载方法引用还指向子类方法。如果子类方法没有重写也没有重载父类方法，则方法引用会指向父类方法。</p>
 </blockquote>
