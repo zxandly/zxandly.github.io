@@ -14,9 +14,11 @@
 <meta property="og:url" content="http://yoursite.com/2018/09/04/使用Lambda重构面向对象的设计模式/index.html">
 <meta property="og:site_name" content="ZxAndLy">
 <meta property="og:locale" content="default">
-<meta property="og:updated_time" content="2018-09-04T12:21:11.380Z">
+<meta property="og:image" content="http://yoursite.com/img/观察者模式8-2.png">
+<meta property="og:updated_time" content="2018-09-27T05:41:42.610Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="使用Lambda重构面向对象的设计模式">
+<meta name="twitter:image" content="http://yoursite.com/img/观察者模式8-2.png">
   
     <link rel="alternative" href="/atom.xml" title="ZxAndLy" type="application/atom+xml">
   
@@ -197,6 +199,7 @@
 <p>这里我们向processCustomer方法引入了第二个参数，它是一个Consumer<customer>类型的参数，与前文定义的makeCustomerHappy的特征保持一致：<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">processCustomer</span><span class="params">(<span class="keyword">int</span> id, Consumer&lt;Customer&gt; makeCustomerHappy)</span> </span>&#123;</span><br><span class="line">    Customer c = Database.getCustomerWithId(id);</span><br><span class="line">    makeCustomerHappy.accept(c);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></customer></p>
 <p>现在你可以方便的通过传递Lambda表达式，直接插入不同的行为，不再需要继承OnlineBanking类了：<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">new</span> OnlineBankingLambda().processCustomer(<span class="number">1337</span>, (Customer c) -&gt;</span><br><span class="line">    System.out.println(<span class="string">"Hello "</span> + c.getName());</span><br></pre></td></tr></table></figure></p>
 <p>这是又一个例子，佐证了Lamba表达式能帮助你解决设计模式与生俱来的设计僵化问题。</p>
+<p>##3.观察者模式<br>观察者模式是一种比较常见的方案，某些事件发生时（比如状态转变），如果一个对象（通常我们称之为主题）需要自动地通知其他多个对象（称为观察者），就会采用该方案。创建图形用户界面（GUI）程序时，你经常会使用该设计模式。这种情况下，你会在图形用户界面组件（比如按钮）上注册一系列的观察者。如果点击按钮，观察者就会收到通知，并随即执行某个特定的行为。但是观察者模式并不局限于图形用户界面。比如，观察者模式也适用于股票交易的情形，多个券商可能都希望对某一支股票价格（主题）的变动做出响应。图8-2通过UML图解释了观察者模式。<br><img src="/img/观察者模式8-2.png"></p>
 
       
 
