@@ -17,7 +17,9 @@
 <meta property="og:description" content="原文地址">
 <meta property="og:locale" content="default">
 <meta property="og:image" content="http://yoursite.com/2018/09/29/弄懂JDK、JRE和JVM到底是什么/img/JDK&JRE&JVM.png">
-<meta property="og:updated_time" content="2018-10-09T12:25:55.660Z">
+<meta property="og:image" content="http://yoursite.com/2018/09/29/弄懂JDK、JRE和JVM到底是什么/img/JVM类加载过程.png">
+<meta property="og:image" content="http://yoursite.com/2018/09/29/弄懂JDK、JRE和JVM到底是什么/img/JVM体系结构与运行原理.jpeg">
+<meta property="og:updated_time" content="2018-10-20T12:59:20.918Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="弄懂JDK、JRE和JVM到底是什么">
 <meta name="twitter:description" content="原文地址">
@@ -174,6 +176,30 @@
 <h4 id="首先是JDK"><a href="#首先是JDK" class="headerlink" title="首先是JDK"></a>首先是JDK</h4><p>JDK（Java Development Kit）是Java语言的软件开发工具包（SDK）。在JDK的安装目录下有一个jre目录（本机地址如下<em>/Library/Java/JavaVirtualMachines/jdk1.8.0_101.jdk/Contents/Home</em>），里面有两个文件夹bin和lib，在这里可以认为bin里的就是jvm，lib中则是jvm工作所需要的类库，而jvm和lib合起来就称为jre。</p>
 <h4 id="其次是JRE"><a href="#其次是JRE" class="headerlink" title="其次是JRE"></a>其次是JRE</h4><p>JRE（Java Runtime Enviorment，Java运行环境），包含JVM标准实现及Java核心类库。JRE是Java运行环境，并不是一个开发环境，所以没有包含任何开发工具（如编译器和调试器）。</p>
 <h4 id="最后JVM"><a href="#最后JVM" class="headerlink" title="最后JVM"></a>最后JVM</h4><p>JVM是Java Virtual Machine（Java虚拟机）的缩写，JVM是一种用于计算设备的规范，它是一个虚构出来的计算机，是通过在实际的计算机上仿真模拟各种计算机功能来实现的。<br><img src="img/JDK&JRE&JVM.png"><br>由上图一目了然：<br>JDK使整个Java的核心，包括了Java运行环境JRE、Java工具和<strong>Java基础类库</strong>（rt.jar）。JRE是运行Java程序所必须的环境的集合，包含JVM标准实现及<strong>Java核心类库</strong>。JVM是整个Java实现跨平台的最核心的部分，能够运行以Java语言写的程序。</p>
+<p>JVM体系结构与运行原理：<br>Java语言写的源程序通过Java编译器，编译成与平台无关的“字节码程序”（.class文件，也就是0，1二进制程序）,然后在OS之上的Java解释器中编译执行。<br><img src="img/JVM类加载过程.png"></p>
+<p>####1.装载<br>装载过程负责找到二进制字节码并加载至JVM中，JVM通过类名、类所在的包名通过ClassLoader来完成类的加载，同样，也采用以上三个元素来标识一个被加载了的类；类名+包名+ClassLoader实例ID。</p>
+<p>####2.链接<br>链接过程负责对二进制字节码的格式进行校验、初始化装载类中的静态变量以及解析类中调用的接口、类。<br>完成校验后，JVM初始化类中的静态变量，并将其值赋为默认值。<br>最后对类中的所有属性、方法进行验证，以确保其需要调用的属性、方法存在，以及具备对应的权限（例如public、private域权限等，会造成NoSuchMethodError、NoSuchFieldError等错误信息）。</p>
+<p>####3.初始化<br>初始化过程中即为执行类中的静态初始化代码、构造器代码以及静态属性的初始化，在四种情况下初始化过程会被触发执行：</p>
+<ul>
+<li>调用了new</li>
+<li>反射调用了类中的方法</li>
+<li>子类调用了初始化</li>
+<li>JVM启动过程中指定的初始化类<br><img src="img/JVM体系结构与运行原理.jpeg"></li>
+</ul>
+<p>ClassLoader抽象类的几个关键方法</p>
+<h4 id="1-loadClass"><a href="#1-loadClass" class="headerlink" title="1.loadClass"></a>1.loadClass</h4><p>此方法负责加载指定名字的类，ClassLoader的实现方法为先从已经加载的类中寻找，如没有则继续从parent ClassLoader中寻找，如仍然没有找到，则从System ClassLoader中寻找，最后再调用findClass方法来寻找，如要改变类的加载顺序，则可覆盖此方法。</p>
+<h4 id="2-findLoadedClass"><a href="#2-findLoadedClass" class="headerlink" title="2.findLoadedClass"></a>2.findLoadedClass</h4><p>此方法负责从当前ClassLoader实例对象的缓存中寻找已加载的类，调用的为native的方法。</p>
+<h4 id="3-findClass"><a href="#3-findClass" class="headerlink" title="3.findClass"></a>3.findClass</h4><p>此方法直接抛出ClassNotFoundException，因此需要通过覆盖loadClass或此方法来以自定义的方法加载相应的类。</p>
+<h4 id="4-findSystemClass"><a href="#4-findSystemClass" class="headerlink" title="4.findSystemClass"></a>4.findSystemClass</h4><p>此方法负责从System ClassLoader中寻找类，如未找到，则继续从Bootstrap ClassLoader中寻找，如仍然未找到，则返回null。</p>
+<h4 id="5-defineClass"><a href="#5-defineClass" class="headerlink" title="5.defineClass"></a>5.defineClass</h4><p>此方法负责将二进制的字节码转换为Class对象</p>
+<h4 id="6-resolveClass"><a href="#6-resolveClass" class="headerlink" title="6.resolveClass"></a>6.resolveClass</h4><p>此方法负责完成Class对象的链接，如已链接过，则会直接返回。</p>
+<p>JVM运行时数据区：</p>
+<p>####第一块：PC寄存器<br>PC寄存器是用于存储每个线程下一步将执行的JVM指令，如该方法为native，则PC寄存器中不存储任何信息</p>
+<p>####第二块：JVM栈<br>JVM栈是线程私有的，每个线程创建的同时都会创建JVM栈，JVM栈中存放的为当前线程中局部基本类型的变量（java中定义的八种基本类型：boolean、char、byte、short、int、long、float、double）、部分的返回结果以及Stack Frame，非基本类型的对象在JVM栈上仅存放一个指向堆上的地址</p>
+<p>####第三块：堆（Heap）<br>它是JVM用来存储对象实例以及数组值的区域，可以认为Java中所有通过new创建的对象的内存都在此分配，Heap中的对象的内存需要等待GC进行回收。</p>
+<p>####第四块：方法区域（Method Area）<br>1.在Sun JDK中这块区域对应的为PermanetGeneration，又称为持久代。<br>2.方法区域存放了所加载的类的信息（名称，修饰符等）、类中的静态变量、类中定义为final类型的变量、类中的Field信息、类中的方法信息，当开发人员在程序中通过Class对象中的getName、isInterface等方法来获取信息时，这些数据都来源于方法区域，同时方法区域也是全局共享的，在一定的条件下它也会被GC，当方法区域需要使用的内存超过其允许的大小时，会抛出OutOfMemory的错误信息。</p>
+<p>####第五块：运行时常量池（Runtime Constant Pool）<br>存放的为类中的固定的常量信息，方法和Field的引用信息等，其空间从方法区域中分配</p>
+<p>####第六块：本地方法堆栈（Native Method Stacks）<br>JVM采用本地方法堆栈来支持native方法的执行，此区域用于存储每个native方法的调用状态。</p>
 
       
 
