@@ -14,9 +14,11 @@
 <meta property="og:url" content="http://yoursite.com/2018/10/25/测试Lambda表达式、调试/index.html">
 <meta property="og:site_name" content="ZxAndLy">
 <meta property="og:locale" content="default">
-<meta property="og:updated_time" content="2018-10-26T12:22:22.541Z">
+<meta property="og:image" content="http://yoursite.com/2018/10/25/测试Lambda表达式、调试/img/使用peek查看Stream流水线中的数据流的值.jpeg">
+<meta property="og:updated_time" content="2018-10-28T08:05:48.071Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="测试Lambda表达式、调试">
+<meta name="twitter:image" content="http://yoursite.com/2018/10/25/测试Lambda表达式、调试/img/使用peek查看Stream流水线中的数据流的值.jpeg">
   
     <link rel="alternative" href="/atom.xml" title="ZxAndLy" type="application/atom+xml">
   
@@ -175,11 +177,11 @@
 <h2 id="3-将复杂的Lambda表达式分到不同的方法"><a href="#3-将复杂的Lambda表达式分到不同的方法" class="headerlink" title="3.将复杂的Lambda表达式分到不同的方法"></a>3.将复杂的Lambda表达式分到不同的方法</h2><p>可能会碰到非常复杂的Lambda表达式，包含大量的业务逻辑，比如需要处理复杂情况的定价算法。你无法在测试程序中引用Lambda表达式，这种情况该如何处理呢？一种策略是将Lambda表达式转换为方法引用（这时往往需要声明一个新的常规方法），这之后，你可以用常规的方式对新的方法进行测试。</p>
 <h2 id="4-高阶函数的测试"><a href="#4-高阶函数的测试" class="headerlink" title="4.高阶函数的测试"></a>4.高阶函数的测试</h2><p>接受函数作为参数的方法或者返回一个函数的方法（所谓的“高阶函数”， higher-order function）更难测试。如果一个方法接受Lambda表达式作为参数，你可以采用的一个方案是使用不同的Lambda表达式对它进行测试。比如，可以使用不同的谓词对第二章中创建的filter方法急性测试<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Test</span></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">testFilter</span><span class="params">()</span> <span class="keyword">throws</span> Exception </span>&#123;</span><br><span class="line">List&lt;Integer&gt; numbers = Arrays.asList(<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="number">4</span>);</span><br><span class="line">List&lt;Integer&gt; even = filter(numbers, i -&gt; i % <span class="number">2</span> == <span class="number">0</span>);</span><br><span class="line">List&lt;Integer&gt; smallerThanThree = filter(numbers, i -&gt; i &lt; <span class="number">3</span>);</span><br><span class="line">assertEquals(Arrays.asList(<span class="number">2</span>, <span class="number">4</span>), even);</span><br><span class="line">assertEquals(Arrays.asList(<span class="number">1</span>, <span class="number">2</span>), smallerThanThree);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
 <p>如果被测试方法的返回值是另一个方法，该如何处理呢？可以仿照我们之前处理Comparator的方法，把它当作一个函数接口，对它的功能进行测试。</p>
-<h2 id="5-调试"><a href="#5-调试" class="headerlink" title="5.调试"></a>5.调试</h2><p>调试有问题的代码时，程序员的兵器库里有两大老式武器，分别是：</p>
-<ul>
-<li>查看栈跟踪</li>
-<li>输出日志<h3 id="5-1查看栈跟踪"><a href="#5-1查看栈跟踪" class="headerlink" title="5.1查看栈跟踪"></a>5.1查看栈跟踪</h3><h3 id="5-2使用日志调试"><a href="#5-2使用日志调试" class="headerlink" title="5.2使用日志调试"></a>5.2使用日志调试</h3></li>
-</ul>
+<h2 id="5-调试"><a href="#5-调试" class="headerlink" title="5.调试"></a>5.调试</h2><p>调试有问题的代码时，程序员的兵器库里有两大老式武器，分别是：查看栈跟踪、输出日志</p>
+<h3 id="5-1查看栈跟踪"><a href="#5-1查看栈跟踪" class="headerlink" title="5.1查看栈跟踪"></a>5.1查看栈跟踪</h3><p>你的程序突然停止运行（比如突然抛出一个异常），这时你首先要调查程序在什么地方发生了异常以及为什么会发生该异常。这是栈帧就非常有用。程序的每次方法调用都会产生相应的调用信息，包括<strong>程序中方法调用的位置、该方法调用使用的参数、被调用方法的本地变量。</strong>这些信息被保存在栈帧上。<br>程序失败时，你会得到它的<strong>栈跟踪</strong>，通过一个又一个栈帧，可以了解程序失败时的概略信息。换句话说，通过这些你能得到程序失败时的方法调用列表。这些方法调用列表最终会帮助你发现问题出现的原因。</p>
+<h4 id="Lambda表达式和栈跟踪"><a href="#Lambda表达式和栈跟踪" class="headerlink" title="Lambda表达式和栈跟踪"></a>Lambda表达式和栈跟踪</h4><p>不幸的是，由于Lambda表达式没有名字，它的栈跟踪可能很难分析。<br>…（详见181-182页）<br>总的来说，我们需要特别注意，涉及Lambda表达式的栈跟踪可能非常难理解。这是Java编译器未来版本可以改进的一个方面。</p>
+<h3 id="5-2使用日志调试"><a href="#5-2使用日志调试" class="headerlink" title="5.2使用日志调试"></a>5.2使用日志调试</h3><p>假设你试图对流操作中的流水线进行测试，该从何入手呢？可以像下面的例子那样，使用forEach将操作的结果日志输出到屏幕上或记录到日志文件中：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">List&lt;Integer&gt; numbers = Arrays.asList(2,3,4,5);</span><br><span class="line">numbers.stream()</span><br><span class="line">       .map(x -&gt; x + 17)</span><br><span class="line">       .filter(x -&gt; x % 2 == 0)</span><br><span class="line">       .limit(3)</span><br><span class="line">       .forEach(System.out::println);</span><br><span class="line">这段代码的输出如下：</span><br><span class="line">20</span><br><span class="line">22</span><br></pre></td></tr></table></figure></p>
+<p>不幸的是，一旦调用forEach，整个流就会恢复运行。到底哪种方法能更有效地帮我们理解Stream流水线中的每个操作？（比如map、filter、limit）产生的输出？<br>这就是流操作方法peek大显身手的时候。peek的设计初衷就是在流的每个元素恢复运行之前，插入执行一个动作。但是他不像forEach那样恢复整个流的运行，而是在一个元素上完成操作之后，它只会将操作顺承到流水线中的下一个操作。图8-4解释了peek的操作流程。下面这段代码中，我们使用了peek输出了Stream流水线操作之前和操作之后的中间值：<br><img src="img/使用peek查看Stream流水线中的数据流的值.jpeg"><br>通过peek操作我们能清楚地了解流水线中每一步的输出结果：<br>from stream: 2<br>after map: 19<br>from stream: 3<br>after map: 20<br>after filter: 20<br>after limit: 20<br>from stream: 4<br>after map: 21<br>from stream: 5<br>after map: 22<br>after filter: 22<br>after limit: 22</p>
 
       
 
