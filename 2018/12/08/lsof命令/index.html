@@ -172,7 +172,7 @@
 <ol>
 <li>查看版本</li>
 </ol>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">$</span> lsof -v</span><br><span class="line">lsof version information:</span><br><span class="line">    revision: 4.82</span><br><span class="line">    latest revision: ftp://lsof.itap.purdue.edu/pub/tools/unix/lsof/</span><br><span class="line">    latest FAQ: ftp://lsof.itap.purdue.edu/pub/tools/unix/lsof/FAQ</span><br><span class="line">    latest man page: ftp://lsof.itap.purdue.edu/pub/tools/unix/lsof/lsof_man</span><br><span class="line">    constructed: Thu Jul 23 17:38:32 UTC 2015</span><br><span class="line">    constructed by and on: mockbuild@c6b8.bsys.dev.centos.org</span><br><span class="line">    compiler: cc</span><br><span class="line">    compiler version: 4.4.7 20120313 (Red Hat 4.4.7-16) (GCC)</span><br><span class="line">    compiler flags: -DLINUXV=26016 -DGLIBCV=212 -DHASIPv6 -DHASSELINUX -D_FILE_OFFSET_BITS=64 -D_LARGEFILE64_SOURCE -DHAS_STRFTIME -DLSOF_VSTR="2.6.16" -O2 -g -pipe -Wall -Wp,-D_FORTIFY_SOURCE=2 -fexceptions -fstack-protector --param=ssp-buffer-size=4 -m64 -mtune=generic -fno-strict-aliasing</span><br><span class="line">    loader flags: -L./lib -llsof  -lselinux</span><br><span class="line">    system info: Linux c6b8.bsys.dev.centos.org 2.6.32-220.el6.x86_64 #1 SMP Tue Dec 6 19:48:22 GMT 2011 x86_64 x86_64 x86_64 GNU/Linux</span><br><span class="line">    Anyone can list all files.</span><br><span class="line">    /dev warnings are disabled.</span><br><span class="line">    Kernel ID check is disabled.</span><br></pre></td></tr></table></figure>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash"> lsof -v</span></span><br><span class="line">lsof version information:</span><br><span class="line">    revision: 4.82</span><br><span class="line">    latest revision: ftp://lsof.itap.purdue.edu/pub/tools/unix/lsof/</span><br><span class="line">    latest FAQ: ftp://lsof.itap.purdue.edu/pub/tools/unix/lsof/FAQ</span><br><span class="line">    latest man page: ftp://lsof.itap.purdue.edu/pub/tools/unix/lsof/lsof_man</span><br><span class="line">    constructed: Thu Jul 23 17:38:32 UTC 2015</span><br><span class="line">    constructed by and on: mockbuild@c6b8.bsys.dev.centos.org</span><br><span class="line">    compiler: cc</span><br><span class="line">    compiler version: 4.4.7 20120313 (Red Hat 4.4.7-16) (GCC)</span><br><span class="line">    compiler flags: -DLINUXV=26016 -DGLIBCV=212 -DHASIPv6 -DHASSELINUX -D_FILE_OFFSET_BITS=64 -D_LARGEFILE64_SOURCE -DHAS_STRFTIME -DLSOF_VSTR="2.6.16" -O2 -g -pipe -Wall -Wp,-D_FORTIFY_SOURCE=2 -fexceptions -fstack-protector --param=ssp-buffer-size=4 -m64 -mtune=generic -fno-strict-aliasing</span><br><span class="line">    loader flags: -L./lib -llsof  -lselinux</span><br><span class="line">    system info: Linux c6b8.bsys.dev.centos.org 2.6.32-220.el6.x86_64 #1 SMP Tue Dec 6 19:48:22 GMT 2011 x86_64 x86_64 x86_64 GNU/Linux</span><br><span class="line">    Anyone can list all files.</span><br><span class="line">    /dev warnings are disabled.</span><br><span class="line">    Kernel ID check is disabled.</span><br></pre></td></tr></table></figure>
 <ol start="2">
 <li>查看 Python  进程打开的fd</li>
 </ol>
@@ -319,6 +319,15 @@
   
 <nav id="article-nav">
   
+    <a href="/2018/12/13/Nginx笔记一/" id="article-nav-newer" class="article-nav-link-wrap">
+      <i class="icon-circle-left"></i>
+      <div class="article-nav-title">
+        
+          Nginx笔记一
+        
+      </div>
+    </a>
+  
   
     <a href="/2018/12/08/ldd命令/" id="article-nav-older" class="article-nav-link-wrap">
       <div class="article-nav-title">ldd命令</div>
@@ -464,15 +473,19 @@ MathJax.Hub.Queue(function() {
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">go</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">Java</a>
               </li>
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">JVM</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">go</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color3">network</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -485,6 +498,10 @@ MathJax.Hub.Queue(function() {
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">Mybatis</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color1">Redis</a>
               </li>
              
               <li class="article-tag-list-item">
